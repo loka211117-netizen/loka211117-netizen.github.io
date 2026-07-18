@@ -9,8 +9,10 @@ SOURCE = Path(sys.argv[1]) if len(sys.argv) > 1 else ROOT / "output" / "ecdict.c
 OUTPUT = ROOT / "vocabulary.generated.js"
 APP = ROOT / "app.js"
 
-TARGETS = {"ielts": 2000, "gaokao": 750, "academic": 750}
-CATEGORY_ORDER = ("ielts", "gaokao", "academic")
+TARGETS = {"daily": 1720, "academic": 1500, "ielts": 2500, "business": 130, "tcm": 150, "gaokao": 2000}
+# Subject-specific lists keep their curated manual vocabulary. IELTS and Gaokao
+# take priority; Daily fills the remaining high-frequency general vocabulary.
+CATEGORY_ORDER = ("tcm", "business", "ielts", "gaokao", "academic", "daily")
 WORD_RE = re.compile(r"^[a-z][a-z -]*$")
 CHINESE_RE = re.compile(r"[\u3400-\u9fff]")
 
@@ -107,12 +109,32 @@ def accepts(category, item):
         return "ielts" in item["tags"]
     if category == "gaokao":
         return "gk" in item["tags"]
-    return item["academic"] and "gk" not in item["tags"]
+    if category == "academic":
+        return item["academic"] and "gk" not in item["tags"]
+    if category == "daily":
+        return True
+    return False
+
+
+def category_score(category, item):
+    if category == "academic":
+        return (
+            0 if item["tags"] & {"toefl", "ky"} else 1,
+            0 if "cet6" in item["tags"] else 1,
+            item["score"],
+        )
+    if category == "daily":
+        return (
+            item["score"][3],
+            item["score"][1],
+            item["score"][2],
+            item["score"][4:],
+        )
+    return item["score"]
 
 
 def main():
     manual = existing_words()
-    used = {word.lower() for pairs in manual.values() for word, _ in pairs}
     candidates = []
     with SOURCE.open("r", encoding="utf-8-sig", newline="") as handle:
         for row in csv.DictReader(handle):
@@ -120,11 +142,20 @@ def main():
             if item:
                 candidates.append(item)
 
-    generated = {}
+    used = set()
+    generated = {category: [] for category in CATEGORY_ORDER}
     for category in CATEGORY_ORDER:
-        required = TARGETS[category] - len(manual[category])
-        pool = sorted((item for item in candidates if accepts(category, item)), key=lambda item: item["score"])
-        selected = []
+        manual_unique = []
+        for word, translation in manual[category]:
+            key = word.lower()
+            if key not in used:
+                manual_unique.append((word, translation))
+                used.add(key)
+        required = TARGETS[category] - len(manual_unique)
+        if required < 0:
+            raise RuntimeError(f"{category}: manual vocabulary exceeds target")
+        pool = sorted((item for item in candidates if accepts(category, item)), key=lambda item: category_score(category, item))
+        selected = generated[category]
         for item in pool:
             if item["word"] in used:
                 continue
@@ -134,7 +165,6 @@ def main():
                 break
         if len(selected) != required:
             raise RuntimeError(f"{category}: needed {required}, found {len(selected)}")
-        generated[category] = selected
 
     lines = ["// Generated from ECDICT exam tags. Run scripts/generate_vocabulary.py to refresh.", "export const generatedVocabulary = {"]
     for category in CATEGORY_ORDER:

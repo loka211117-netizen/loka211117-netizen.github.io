@@ -121,15 +121,17 @@ const {
   searchVocabulary,
   calculateCategoryProgress,
   createDefaultState,
-  recordQuizResult
+  recordQuizResult,
+  templateItems
 } = app;
 
-assert.equal(vocabularyItems.length, 4000, "Vocabulary library must contain exactly 4,000 items");
+assert.equal(vocabularyItems.length, 8000, "Vocabulary library must contain exactly 8,000 items");
 assert.deepEqual(
   Object.fromEntries(Object.entries(Object.groupBy(vocabularyItems, (item) => item.category)).map(([key, items]) => [key, items.length])),
-  { daily: 220, academic: 750, gaokao: 750, ielts: 2000, tcm: 150, business: 130 }
+  { daily: 1720, academic: 1500, gaokao: 2000, ielts: 2500, tcm: 150, business: 130 }
 );
-assert.equal(vocabularyItems.length * 2, 8000, "Quiz must provide 8,000 English-Chinese direction combinations");
+assert.equal(new Set(vocabularyItems.map((item) => item.word.toLowerCase())).size, vocabularyItems.length, "Vocabulary must not repeat across categories");
+assert.equal(vocabularyItems.length * 2, 16000, "Quiz must provide 16,000 English-Chinese direction combinations");
 const ieltsWords = vocabularyItems.filter((item) => item.category === "ielts");
 assert.equal(ieltsWords[0].word, "academic", "IELTS foundation words must appear before advanced vocabulary");
 for (const word of ["academic", "satisfaction", "abandon"]) {
@@ -137,6 +139,14 @@ for (const word of ["academic", "satisfaction", "abandon"]) {
 }
 assert.ok(/Math\.random\(\) > \.5 \? "en-zh" : "zh-en"/.test(js), "Quiz direction must randomly alternate between English-Chinese and Chinese-English");
 assert.deepEqual(categoryTargets, { daily: 3000, academic: 3000, ielts: 6000, business: 2000, tcm: 2000, gaokao: 3500 });
+
+assert.ok(Array.isArray(templateItems) && templateItems.length >= 18, "Template library must include at least 18 bilingual templates");
+for (const topic of ["Exercise", "Universal Opinion", "Causes and Effects", "Solutions", "Advantages and Disadvantages"]) {
+  assert.ok(templateItems.some((item) => item.topic === topic), `Missing universal template topic: ${topic}`);
+}
+assert.ok(templateItems.every((item) => item.paragraph && item.zh && item.pattern), "Every template must remain bilingual and reusable");
+assert.ok(/data-sentence="\$\{escapeHtml\(item\.paragraph\)\}"/.test(js), "Template audio must receive only the English paragraph");
+assert.ok(!/data-sentence="\$\{escapeHtml\(item\.zh\)\}"/.test(js), "Template audio must not receive Chinese text");
 
 assert.ok(searchVocabulary(vocabularyItems, "针灸").some((item) => item.word === "acupuncture"), "Chinese medical search must work");
 assert.ok(searchVocabulary(vocabularyItems, "academic").some((item) => item.zh.includes("学术")), "English search must work");
@@ -185,4 +195,4 @@ for (const token of [
   assert.ok(appCopy.includes(token), `Missing interactive learning plan behavior: ${token}`);
 }
 
-console.log("Individual English Platform acceptance checks passed: 4,000 words and 8,000 quiz combinations verified.");
+console.log("Individual English Platform acceptance checks passed: 8,000 unique words, 16,000 quiz combinations, and enriched templates verified.");

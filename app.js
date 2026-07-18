@@ -1,7 +1,7 @@
 import { generatedVocabulary } from "./vocabulary.generated.js";
 
 export const categoryTargets = { daily: 3000, academic: 3000, ielts: 6000, business: 2000, tcm: 2000, gaokao: 3500 };
-const categoryLimits = { daily: 220, academic: 750, gaokao: 750, ielts: 2000, tcm: 150, business: 130 };
+const categoryLimits = { daily: 1720, academic: 1500, gaokao: 2000, ielts: 2500, tcm: 150, business: 130 };
 const categoryMeta = {
   daily: { label: "Daily 日常", short: "Daily · 日常" },
   academic: { label: "Academic 学术", short: "Academic · 学术" },
@@ -1346,15 +1346,26 @@ workplace culture|职场文化
 `.trim()
 };
 
-function parseVocabulary(category, raw) {
+const vocabularyBuildOrder = ["tcm", "business", "ielts", "gaokao", "academic", "daily"];
+
+function parseVocabulary(category, raw, usedWords) {
   const combined = [raw, generatedVocabulary[category]].filter(Boolean).join("\n");
-  return combined.split("\n").map((line) => line.trim()).filter(Boolean).slice(0, categoryLimits[category]).map((line, index) => {
+  const items = [];
+  for (const line of combined.split("\n").map((value) => value.trim()).filter(Boolean)) {
     const [word, zh] = line.split("|");
-    return { id: `${category}-${String(index + 1).padStart(3, "0")}`, word, zh, category, tags: [category, word.includes(" ") ? "phrase" : "word"] };
-  });
+    const key = word.toLocaleLowerCase();
+    if (usedWords.has(key)) continue;
+    usedWords.add(key);
+    items.push({ id: `${category}-${String(items.length + 1).padStart(4, "0")}`, word, zh, category, tags: [category, word.includes(" ") ? "phrase" : "word"] });
+    if (items.length === categoryLimits[category]) break;
+  }
+  return items;
 }
 
-export const vocabularyItems = Object.entries(vocabularySeeds).flatMap(([category, raw]) => parseVocabulary(category, raw));
+export const vocabularyItems = (() => {
+  const usedWords = new Set();
+  return vocabularyBuildOrder.flatMap((category) => parseVocabulary(category, vocabularySeeds[category], usedWords));
+})();
 
 export function searchVocabulary(items, query, category = "all") {
   const normalised = query.trim().toLocaleLowerCase();
@@ -1420,7 +1431,7 @@ const quotes = [
   ["A mountain is climbed one step at a time.", "再高的山，也要一步一步走过。"]
 ];
 
-const templateItems = [
+export const templateItems = [
   { topic: "Teenage Pressure", title: "Education and pressure", paragraph: "Hong Kong has an ossified education system that focuses too much on academic results. Schools and parents often push students to perform well. As a result, many teenagers have little time to sleep or play.", zh: "香港教育制度过度重视学业成绩。学校和家长往往要求学生表现出色，因此许多青少年缺少睡眠和休闲时间。", pattern: "[Place] has a system that focuses too much on [result]. As a result, [group] have little time to [activity]." },
   { topic: "University Study", title: "Independent learning", paragraph: "University study demands more than attending lectures. Students must plan their time, review material regularly and ask for help before problems accumulate. Self-discipline is not about studying all day; it is about making useful decisions consistently.", zh: "大学学习不只是上课。学生需要规划时间、定期复习，并在问题累积前寻求帮助。自律不是整天学习，而是持续作出有效决定。", pattern: "[Activity] demands more than [basic action]. It is not about [A]; it is about [B]." },
   { topic: "Sleep", title: "Sleep and performance", paragraph: "Sleep is often treated as unimportant when students are under pressure. However, it directly affects memory, mood and concentration. Cutting sleep may save time tonight, but it usually reduces performance tomorrow.", zh: "学生面对压力时，睡眠常被视为不重要。然而，睡眠直接影响记忆、情绪和专注力。今晚少睡看似节省时间，却往往降低第二天的表现。", pattern: "[Topic] is often treated as unimportant. However, it directly affects [A], [B] and [C]." },
@@ -1432,7 +1443,13 @@ const templateItems = [
   { topic: "Acupuncture", title: "Introducing acupuncture", paragraph: "Acupuncture is a therapeutic method within traditional Chinese medicine. It involves stimulating specific points and should be performed by trained practitioners. Treatment must always take safety and the patient's condition into account.", zh: "针灸是中医的一种治疗方法，通过刺激特定穴位发挥作用，并应由受过训练的专业人员操作。治疗必须考虑安全与患者情况。", pattern: "[Therapy] is a therapeutic method within [system]. It involves [action]." },
   { topic: "Success", title: "Progress over perfection", paragraph: "People often delay action because they are waiting for the perfect moment. In reality, progress usually begins with an imperfect first step. What matters is the willingness to adjust and continue.", zh: "人们常因等待完美时机而延迟行动。现实中，进步通常始于并不完美的第一步，重要的是愿意调整并继续。", pattern: "People often [problem] because [reason]. In reality, [better idea]." },
   { topic: "Friendship", title: "Reliable friendship", paragraph: "A reliable friend does more than share pleasant moments. They listen without rushing to judge and remain present when life becomes difficult. Trust is built through consistent actions rather than impressive promises.", zh: "可靠的朋友不只是分享快乐时光。他们会不急于评判地倾听，也会在生活困难时陪伴。信任来自持续行动，而不是动听承诺。", pattern: "A reliable [person] does more than [simple action]. [Quality] is built through [action]." },
-  { topic: "Public Health", title: "Prevention matters", paragraph: "Healthcare systems often spend more on treatment than prevention. Yet early education, regular screening and accessible primary care can reduce long-term costs. Prevention should therefore be treated as an investment rather than an expense.", zh: "医疗体系往往在治疗上的支出高于预防。然而，早期教育、定期筛查和可及的基层医疗能够降低长期成本，因此预防应被视为投资而非开支。", pattern: "[System] often spends more on [A] than [B]. [B] should be treated as an investment." }
+  { topic: "Public Health", title: "Prevention matters", paragraph: "Healthcare systems often spend more on treatment than prevention. Yet early education, regular screening and accessible primary care can reduce long-term costs. Prevention should therefore be treated as an investment rather than an expense.", zh: "医疗体系往往在治疗上的支出高于预防。然而，早期教育、定期筛查和可及的基层医疗能够降低长期成本，因此预防应被视为投资而非开支。", pattern: "[System] often spends more on [A] than [B]. [B] should be treated as an investment." },
+  { topic: "Exercise", title: "Movement supports learning", paragraph: "Regular exercise is not only good for physical health. It can also improve mood, sleep and concentration. Even a short walk or a simple workout can make a demanding study schedule more sustainable.", zh: "规律运动不只对身体健康有益，也能改善情绪、睡眠和专注力。即使是短暂散步或简单锻炼，也能让紧张的学习安排更容易坚持。", pattern: "[Habit] is not only good for [benefit]. It can also improve [A], [B] and [C]." },
+  { topic: "Universal Opinion", title: "A balanced view", paragraph: "In my view, this issue should not be treated as a simple choice between two extremes. A practical solution should recognise the benefits of change while reducing its possible disadvantages.", zh: "我认为，这个问题不应被视为两个极端之间的简单选择。务实的方案应承认改变的好处，同时减少其可能带来的弊端。", pattern: "In my view, [issue] should not be treated as a simple choice between [A] and [B]." },
+  { topic: "Causes and Effects", title: "Explaining a trend", paragraph: "This trend is mainly caused by changes in lifestyle, technology and public expectations. As these factors continue to develop, they are likely to affect the way people study, work and communicate.", zh: "这一趋势主要由生活方式、科技和公众期望的变化造成。随着这些因素持续发展，它们很可能影响人们学习、工作和沟通的方式。", pattern: "This trend is mainly caused by [A], [B] and [C]. As a result, [effect]." },
+  { topic: "Solutions", title: "From problem to action", paragraph: "No single measure can solve this problem completely. However, progress can be made when governments, schools and individuals take clear responsibilities and work towards the same goal.", zh: "没有单一措施能够彻底解决这个问题。然而，当政府、学校和个人明确责任并朝着同一目标努力时，问题便能得到改善。", pattern: "No single measure can solve [problem] completely. However, progress can be made when [groups] [action]." },
+  { topic: "Advantages and Disadvantages", title: "A fair comparison", paragraph: "This development offers clear advantages, including greater convenience and wider access to information. At the same time, it may create new pressures that need to be managed carefully.", zh: "这一发展带来明显优势，包括更大的便利和更广泛的信息获取机会。同时，它也可能带来需要谨慎处理的新压力。", pattern: "[Development] offers clear advantages, including [A] and [B]. At the same time, it may create [drawback]." },
+  { topic: "Universal Example", title: "Making an argument concrete", paragraph: "A clear example can show why this issue matters in everyday life. When people can see how a change affects their time, health or opportunities, the argument becomes easier to understand.", zh: "清晰的例子能够说明这一问题为何与日常生活有关。当人们看到某项改变如何影响时间、健康或机会时，论点便更容易理解。", pattern: "A clear example can show why [issue] matters. When [group] can see [effect], [result]." }
 ];
 
 const insertSnippets = {
