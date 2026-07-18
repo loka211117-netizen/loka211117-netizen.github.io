@@ -6,416 +6,151 @@ let timerSeconds = 120;
 let availableVoices = [];
 
 const vocabularyItems = [
-  { id: "v001", word: "academic", phonetic: "/ˌækəˈdemɪk/", zh: "学术的；学习成绩的", example: "Academic results should not be the only measure of a student.", exampleZh: "学习成绩不应该是衡量学生的唯一标准。", category: "大学英语", tags: ["education", "writing"] },
-  { id: "v002", word: "assignment", phonetic: "/əˈsaɪnmənt/", zh: "作业；任务", example: "I need to finish a writing assignment before Friday.", exampleZh: "我需要在周五前完成一份写作作业。", category: "大学英语", tags: ["campus"] },
-  { id: "v003", word: "deadline", phonetic: "/ˈdedlaɪn/", zh: "截止日期", example: "The deadline pushed me to manage my time better.", exampleZh: "截止日期促使我更好地管理时间。", category: "大学英语", tags: ["study"] },
-  { id: "v004", word: "lecture", phonetic: "/ˈlektʃə/", zh: "讲座；课堂授课", example: "The lecture gave us a clear introduction to medical English.", exampleZh: "这节课让我们清楚了解医学英语。", category: "大学英语", tags: ["campus"] },
-  { id: "v005", word: "seminar", phonetic: "/ˈsemɪnɑː/", zh: "研讨课", example: "Students are expected to speak actively in the seminar.", exampleZh: "学生需要在研讨课中积极发言。", category: "大学英语", tags: ["campus"] },
-  { id: "v006", word: "efficient", phonetic: "/ɪˈfɪʃnt/", zh: "高效的", example: "An efficient plan makes daily study less stressful.", exampleZh: "高效计划能减轻每天学习压力。", category: "大学英语", tags: ["writing"] },
-  { id: "v007", word: "priority", phonetic: "/praɪˈɒrəti/", zh: "优先事项", example: "For me, GPA and English are the top priorities.", exampleZh: "对我来说，GPA 和英语是最高优先级。", category: "大学英语", tags: ["planning"] },
-  { id: "v008", word: "evidence", phonetic: "/ˈevɪdəns/", zh: "证据", example: "Good writing needs evidence, not just opinion.", exampleZh: "好文章需要证据，而不只是观点。", category: "大学英语", tags: ["writing"] },
-  { id: "v009", word: "argument", phonetic: "/ˈɑːɡjumənt/", zh: "论点；争论", example: "A strong argument is clear and easy to follow.", exampleZh: "有力的论点清楚且容易理解。", category: "大学英语", tags: ["writing"] },
-  { id: "v010", word: "improve", phonetic: "/ɪmˈpruːv/", zh: "改善；提高", example: "I want to improve my speaking fluency.", exampleZh: "我想提高口语流利度。", category: "大学英语", tags: ["basic"] },
-  { id: "v011", word: "pressure", phonetic: "/ˈpreʃə/", zh: "压力", example: "Teenagers face pressure from exams and parents.", exampleZh: "青少年面对考试和父母带来的压力。", category: "高考英语", tags: ["template"] },
-  { id: "v012", word: "teenager", phonetic: "/ˈtiːneɪdʒə/", zh: "青少年", example: "Teenagers need time to sleep and play.", exampleZh: "青少年需要时间睡觉和玩耍。", category: "高考英语", tags: ["life"] },
-  { id: "v013", word: "result", phonetic: "/rɪˈzʌlt/", zh: "结果；成绩", example: "Schools focus too much on exam results.", exampleZh: "学校太重视考试成绩。", category: "高考英语", tags: ["education"] },
-  { id: "v014", word: "habit", phonetic: "/ˈhæbɪt/", zh: "习惯", example: "A good reading habit can improve vocabulary.", exampleZh: "好的阅读习惯可以提高词汇量。", category: "高考英语", tags: ["basic"] },
-  { id: "v015", word: "responsibility", phonetic: "/rɪˌspɒnsəˈbɪləti/", zh: "责任", example: "Students should learn to take responsibility for their study.", exampleZh: "学生应该学会对自己的学习负责。", category: "高考英语", tags: ["writing"] },
-  { id: "v016", word: "environment", phonetic: "/ɪnˈvaɪrənmənt/", zh: "环境", example: "A quiet environment helps students focus.", exampleZh: "安静环境有助学生集中注意力。", category: "高考英语", tags: ["topic"] },
-  { id: "v017", word: "communicate", phonetic: "/kəˈmjuːnɪkeɪt/", zh: "沟通", example: "Parents should communicate with teenagers patiently.", exampleZh: "父母应该耐心和青少年沟通。", category: "高考英语", tags: ["speaking"] },
-  { id: "v018", word: "challenge", phonetic: "/ˈtʃælɪndʒ/", zh: "挑战", example: "Learning English is a long-term challenge.", exampleZh: "学英语是长期挑战。", category: "高考英语", tags: ["basic"] },
-  { id: "v019", word: "opportunity", phonetic: "/ˌɒpəˈtjuːnəti/", zh: "机会", example: "English gives me more academic opportunities.", exampleZh: "英语给我更多学术机会。", category: "高考英语", tags: ["writing"] },
-  { id: "v020", word: "benefit", phonetic: "/ˈbenɪfɪt/", zh: "好处；受益", example: "Students benefit from regular practice.", exampleZh: "学生能从规律练习中受益。", category: "高考英语", tags: ["writing"] },
-  { id: "v021", word: "acupuncture", phonetic: "/ˈækjupʌŋktʃə/", zh: "针灸", example: "Acupuncture is widely used in traditional Chinese medicine.", exampleZh: "针灸广泛用于中医。", category: "中医英语", tags: ["TCM"] },
-  { id: "v022", word: "meridian", phonetic: "/məˈrɪdiən/", zh: "经络", example: "A meridian is a pathway related to qi and blood.", exampleZh: "经络是与气血相关的通路。", category: "中医英语", tags: ["TCM"] },
-  { id: "v023", word: "qi", phonetic: "/tʃiː/", zh: "气", example: "Qi is a core concept in Chinese medicine.", exampleZh: "气是中医核心概念。", category: "中医英语", tags: ["TCM"] },
-  { id: "v024", word: "blood stasis", phonetic: "/blʌd ˈsteɪsɪs/", zh: "血瘀", example: "Blood stasis may cause fixed pain.", exampleZh: "血瘀可能导致固定痛。", category: "中医英语", tags: ["diagnosis"] },
-  { id: "v025", word: "deficiency", phonetic: "/dɪˈfɪʃnsi/", zh: "虚证；不足", example: "Qi deficiency can lead to fatigue.", exampleZh: "气虚可导致疲劳。", category: "中医英语", tags: ["diagnosis"] },
-  { id: "v026", word: "excess", phonetic: "/ɪkˈses/", zh: "实证；过盛", example: "Excess heat may cause a red tongue.", exampleZh: "实热可能导致舌红。", category: "中医英语", tags: ["diagnosis"] },
-  { id: "v027", word: "tongue coating", phonetic: "/tʌŋ ˈkəʊtɪŋ/", zh: "舌苔", example: "The tongue coating gives useful diagnostic information.", exampleZh: "舌苔提供有用的诊断信息。", category: "中医英语", tags: ["diagnosis"] },
-  { id: "v028", word: "pulse", phonetic: "/pʌls/", zh: "脉象；脉搏", example: "A doctor checks the pulse before choosing treatment.", exampleZh: "医生选治疗前会诊脉。", category: "中医英语", tags: ["diagnosis"] },
-  { id: "v029", word: "herbal formula", phonetic: "/ˈhɜːbəl ˈfɔːmjələ/", zh: "方剂", example: "A herbal formula should match the pattern.", exampleZh: "方剂应当对应证型。", category: "中医英语", tags: ["formula"] },
-  { id: "v030", word: "symptom", phonetic: "/ˈsɪmptəm/", zh: "症状", example: "The main symptom is poor sleep.", exampleZh: "主要症状是睡眠差。", category: "中医英语", tags: ["clinical"] },
-  { id: "v031", word: "diagnosis", phonetic: "/ˌdaɪəɡˈnəʊsɪs/", zh: "诊断", example: "A clear diagnosis is the basis of treatment.", exampleZh: "清楚诊断是治疗基础。", category: "中医英语", tags: ["clinical"] },
-  { id: "v032", word: "treatment", phonetic: "/ˈtriːtmənt/", zh: "治疗", example: "The treatment focuses on reducing pain.", exampleZh: "治疗重点是减轻疼痛。", category: "中医英语", tags: ["clinical"] },
-  { id: "v033", word: "holistic", phonetic: "/həʊˈlɪstɪk/", zh: "整体的", example: "Chinese medicine often takes a holistic view.", exampleZh: "中医常采取整体观。", category: "中医英语", tags: ["concept"] },
-  { id: "v034", word: "balance", phonetic: "/ˈbæləns/", zh: "平衡", example: "Health is often understood as a balance of the body.", exampleZh: "健康常被理解为身体平衡。", category: "中医英语", tags: ["concept"] },
-  { id: "v035", word: "insomnia", phonetic: "/ɪnˈsɒmniə/", zh: "失眠", example: "Insomnia is common among stressed students.", exampleZh: "失眠在压力大的学生中很常见。", category: "中医英语", tags: ["symptom"] },
-  { id: "v036", word: "fatigue", phonetic: "/fəˈtiːɡ/", zh: "疲劳", example: "Long-term fatigue should not be ignored.", exampleZh: "长期疲劳不应被忽视。", category: "中医英语", tags: ["symptom"] },
-  { id: "v037", word: "candidate", phonetic: "/ˈkændɪdət/", zh: "考生；候选人", example: "IELTS candidates need to manage time carefully.", exampleZh: "雅思考生需要谨慎管理时间。", category: "IELTS", tags: ["exam"] },
-  { id: "v038", word: "coherent", phonetic: "/kəʊˈhɪərənt/", zh: "连贯的", example: "A coherent answer is easy for the examiner to follow.", exampleZh: "连贯回答让考官容易跟上。", category: "IELTS", tags: ["speaking"] },
-  { id: "v039", word: "fluent", phonetic: "/ˈfluːənt/", zh: "流利的", example: "Fluent speaking does not mean speaking very fast.", exampleZh: "口语流利不等于说得很快。", category: "IELTS", tags: ["speaking"] },
-  { id: "v040", word: "paraphrase", phonetic: "/ˈpærəfreɪz/", zh: "改写；同义转述", example: "Paraphrase the question in your introduction.", exampleZh: "在引言中改写题目。", category: "IELTS", tags: ["writing"] },
-  { id: "v041", word: "outweigh", phonetic: "/ˌaʊtˈweɪ/", zh: "超过；比...更重要", example: "The benefits outweigh the disadvantages.", exampleZh: "好处大于坏处。", category: "IELTS", tags: ["writing"] },
-  { id: "v042", word: "trend", phonetic: "/trend/", zh: "趋势", example: "The chart shows an upward trend.", exampleZh: "图表显示上升趋势。", category: "IELTS", tags: ["task1"] },
-  { id: "v043", word: "significant", phonetic: "/sɪɡˈnɪfɪkənt/", zh: "显著的；重要的", example: "There was a significant increase in the figure.", exampleZh: "该数据有显著增长。", category: "IELTS", tags: ["task1"] },
-  { id: "v044", word: "urban", phonetic: "/ˈɜːbən/", zh: "城市的", example: "Urban life can be convenient but stressful.", exampleZh: "城市生活方便但有压力。", category: "IELTS", tags: ["topic"] },
-  { id: "v045", word: "consume", phonetic: "/kənˈsjuːm/", zh: "消费；消耗", example: "Young people consume a lot of online content.", exampleZh: "年轻人消费大量网络内容。", category: "IELTS", tags: ["topic"] },
-  { id: "v046", word: "policy", phonetic: "/ˈpɒləsi/", zh: "政策", example: "Education policy should protect students' mental health.", exampleZh: "教育政策应保护学生心理健康。", category: "IELTS", tags: ["writing"] },
-  { id: "v047", word: "stressful", phonetic: "/ˈstresfəl/", zh: "有压力的", example: "A stressful timetable can harm sleep quality.", exampleZh: "压力大的时间表会损害睡眠质量。", category: "高考英语", tags: ["life"] },
-  { id: "v048", word: "ossified", phonetic: "/ˈɒsɪfaɪd/", zh: "僵化的", example: "An ossified system is hard to change.", exampleZh: "僵化制度很难改变。", category: "IELTS", tags: ["advanced"] },
-  { id: "v049", word: "well-being", phonetic: "/ˌwel ˈbiːɪŋ/", zh: "身心健康；幸福感", example: "Schools should care about students' well-being.", exampleZh: "学校应关心学生身心健康。", category: "大学英语", tags: ["education"] },
-  { id: "v050", word: "resilience", phonetic: "/rɪˈzɪliəns/", zh: "抗压能力；恢复力", example: "Resilience helps students deal with setbacks.", exampleZh: "抗压能力帮助学生应对挫折。", category: "大学英语", tags: ["growth"] },
-  { id: "v051", word: "clinical", phonetic: "/ˈklɪnɪkəl/", zh: "临床的", example: "Clinical practice connects theory with real patients.", exampleZh: "临床实践把理论和真实病人连接起来。", category: "中医英语", tags: ["clinical"] },
-  { id: "v052", word: "constitution", phonetic: "/ˌkɒnstɪˈtjuːʃn/", zh: "体质；构成", example: "A patient's constitution affects treatment choices.", exampleZh: "病人体质影响治疗选择。", category: "中医英语", tags: ["concept"] }
+  { id: "v01", word: "academic", phonetic: "/ˌækəˈdemɪk/", zh: "學術的；學業相關的", example: "Academic performance should be assessed through more than examination results.", exampleZh: "學業表現不應只以考試成績評估。", category: "大學英語", tags: ["essay", "education"] },
+  { id: "v02", word: "articulate", phonetic: "/ɑːˈtɪkjələt/", zh: "清晰表達", example: "She articulated her argument with evidence and restraint.", exampleZh: "她以證據和節制清楚表達論點。", category: "大學英語", tags: ["speaking", "essay"] },
+  { id: "v03", word: "coherent", phonetic: "/kəʊˈhɪərənt/", zh: "連貫的", example: "A coherent paragraph develops one central claim at a time.", exampleZh: "連貫的段落每次只發展一個核心主張。", category: "大學英語", tags: ["writing"] },
+  { id: "v04", word: "substantiate", phonetic: "/səbˈstænʃieɪt/", zh: "證實；以證據支持", example: "Students must substantiate major claims with reliable sources.", exampleZh: "學生必須以可靠資料支持重要主張。", category: "大學英語", tags: ["essay", "research"] },
+  { id: "v05", word: "inherent", phonetic: "/ɪnˈhɪərənt/", zh: "內在的；固有的", example: "Uncertainty is inherent in clinical decision-making.", exampleZh: "不確定性是臨床決策固有的一部分。", category: "大學英語", tags: ["academic"] },
+  { id: "v06", word: "feasible", phonetic: "/ˈfiːzəbəl/", zh: "可行的", example: "The proposal is ambitious but financially feasible.", exampleZh: "該方案有雄心，但在財務上可行。", category: "大學英語", tags: ["essay"] },
+  { id: "v07", word: "consequently", phonetic: "/ˈkɒnsɪkwəntli/", zh: "因此；結果是", example: "The timetable was unrealistic; consequently, students became exhausted.", exampleZh: "時間表不切實際，因此學生變得疲憊。", category: "大學英語", tags: ["linker"] },
+  { id: "v08", word: "perspective", phonetic: "/pəˈspektɪv/", zh: "觀點；視角", example: "The issue should be examined from both a social and personal perspective.", exampleZh: "這個議題應從社會及個人視角審視。", category: "大學英語", tags: ["essay"] },
+  { id: "v09", word: "allocate", phonetic: "/ˈæləkeɪt/", zh: "分配", example: "Allocate the first hour to the most cognitively demanding task.", exampleZh: "把首一小時分配給最需要思考的任務。", category: "大學英語", tags: ["study"] },
+  { id: "v10", word: "prevalent", phonetic: "/ˈprevələnt/", zh: "普遍的", example: "Sleep deprivation is prevalent among university students.", exampleZh: "睡眠不足在大學生中相當普遍。", category: "大學英語", tags: ["health"] },
+  { id: "v11", word: "compelling", phonetic: "/kəmˈpelɪŋ/", zh: "有說服力的", example: "A compelling conclusion returns to the main argument without repeating it.", exampleZh: "有說服力的結論會回到核心論點，而非重複全文。", category: "大學英語", tags: ["writing"] },
+  { id: "v12", word: "discipline", phonetic: "/ˈdɪsəplɪn/", zh: "自律；學科", example: "Self-discipline matters more than occasional bursts of motivation.", exampleZh: "自律比偶爾爆發的動力更重要。", category: "大學英語", tags: ["study"] },
+  { id: "v13", word: "adversity", phonetic: "/ədˈvɜːsəti/", zh: "逆境", example: "Adversity can develop resilience when support is available.", exampleZh: "有支援時，逆境可以培養韌性。", category: "高考英語", tags: ["writing"] },
+  { id: "v14", word: "aspiration", phonetic: "/ˌæspəˈreɪʃn/", zh: "抱負；志向", example: "Her aspiration is to combine clinical skill with public service.", exampleZh: "她的志向是把臨床能力與公共服務結合。", category: "高考英語", tags: ["speaking"] },
+  { id: "v15", word: "deteriorate", phonetic: "/dɪˈtɪəriəreɪt/", zh: "惡化", example: "Mental health may deteriorate when pressure is ignored for too long.", exampleZh: "長期忽視壓力，心理健康可能惡化。", category: "高考英語", tags: ["health"] },
+  { id: "v16", word: "advocate", phonetic: "/ˈædvəkeɪt/", zh: "提倡；倡導者", example: "Many teachers advocate a more balanced approach to assessment.", exampleZh: "許多教師倡議更平衡的評估方式。", category: "高考英語", tags: ["essay"] },
+  { id: "v17", word: "incentive", phonetic: "/ɪnˈsentɪv/", zh: "誘因；動機", example: "Grades can be an incentive, but they should not become the only purpose of learning.", exampleZh: "成績可以是動機，但不應成為學習的唯一目的。", category: "高考英語", tags: ["education"] },
+  { id: "v18", word: "inevitable", phonetic: "/ɪnˈevɪtəbəl/", zh: "不可避免的", example: "Some anxiety before an important examination is inevitable.", exampleZh: "重要考試前有一些焦慮是難免的。", category: "高考英語", tags: ["writing"] },
+  { id: "v19", word: "empower", phonetic: "/ɪmˈpaʊə/", zh: "使能夠；賦能", example: "Good education should empower students to make informed choices.", exampleZh: "好的教育應使學生能作出有根據的選擇。", category: "高考英語", tags: ["education"] },
+  { id: "v20", word: "persevere", phonetic: "/ˌpɜːsɪˈvɪə/", zh: "堅持不懈", example: "To persevere, students need a realistic routine rather than perfectionism.", exampleZh: "要堅持，學生需要可持續的日常安排，而非完美主義。", category: "高考英語", tags: ["growth"] },
+  { id: "v21", word: "indispensable", phonetic: "/ˌɪndɪˈspensəbəl/", zh: "不可或缺的", example: "Rest is indispensable to long-term concentration.", exampleZh: "休息對長期專注不可或缺。", category: "高考英語", tags: ["health"] },
+  { id: "v22", word: "cultivate", phonetic: "/ˈkʌltɪveɪt/", zh: "培養", example: "Reading widely cultivates both vocabulary and judgement.", exampleZh: "廣泛閱讀可培養詞彙量及判斷力。", category: "高考英語", tags: ["study"] },
+  { id: "v23", word: "acupuncture", phonetic: "/ˈækjʊpʌŋktʃə/", zh: "針灸", example: "Acupuncture should be performed by appropriately trained practitioners.", exampleZh: "針灸應由受過適當訓練的從業者施行。", category: "中醫英語", tags: ["TCM", "clinical"] },
+  { id: "v24", word: "meridian", phonetic: "/məˈrɪdiən/", zh: "經絡", example: "In TCM theory, meridians connect the body's functional systems.", exampleZh: "中醫理論中，經絡連繫身體的功能系統。", category: "中醫英語", tags: ["TCM"] },
+  { id: "v25", word: "syndrome differentiation", phonetic: "/ˈsɪndrəʊm ˌdɪfərenʃiˈeɪʃn/", zh: "辨證", example: "Syndrome differentiation guides the choice of treatment principle.", exampleZh: "辨證指導治療原則的選擇。", category: "中醫英語", tags: ["diagnosis"] },
+  { id: "v26", word: "constitution", phonetic: "/ˌkɒnstɪˈtjuːʃn/", zh: "體質", example: "A patient's constitution may influence the treatment strategy.", exampleZh: "患者體質可能影響治療策略。", category: "中醫英語", tags: ["diagnosis"] },
+  { id: "v27", word: "deficiency", phonetic: "/dɪˈfɪʃnsi/", zh: "虛證；不足", example: "Qi deficiency may present with fatigue and shortness of breath.", exampleZh: "氣虛可表現為疲乏及氣短。", category: "中醫英語", tags: ["diagnosis"] },
+  { id: "v28", word: "blood stasis", phonetic: "/blʌd ˈsteɪsɪs/", zh: "血瘀", example: "Blood stasis is often associated with fixed and stabbing pain.", exampleZh: "血瘀常與固定及刺痛相關。", category: "中醫英語", tags: ["diagnosis"] },
+  { id: "v29", word: "tongue coating", phonetic: "/tʌŋ ˈkəʊtɪŋ/", zh: "舌苔", example: "Tongue coating provides useful information in pattern identification.", exampleZh: "舌苔為辨證提供有用資料。", category: "中醫英語", tags: ["diagnosis"] },
+  { id: "v30", word: "palpation", phonetic: "/pælˈpeɪʃn/", zh: "觸診；按診", example: "Palpation can help identify tenderness and changes in tissue quality.", exampleZh: "觸診有助識別壓痛及組織質地變化。", category: "中醫英語", tags: ["clinical"] },
+  { id: "v31", word: "therapeutic", phonetic: "/ˌθerəˈpjuːtɪk/", zh: "治療性的", example: "The therapeutic aim is to relieve pain while restoring function.", exampleZh: "治療目標是在恢復功能時同時緩解疼痛。", category: "中醫英語", tags: ["clinical"] },
+  { id: "v32", word: "herbal formula", phonetic: "/ˈhɜːbl ˈfɔːmjələ/", zh: "方劑", example: "An herbal formula is modified according to the patient's presentation.", exampleZh: "方劑會按患者表現作出加減。", category: "中醫英語", tags: ["formula"] },
+  { id: "v33", word: "contraindication", phonetic: "/ˌkɒntrəɪndɪˈkeɪʃn/", zh: "禁忌證", example: "Practitioners must recognise contraindications before treatment begins.", exampleZh: "治療前必須識別禁忌證。", category: "中醫英語", tags: ["safety"] },
+  { id: "v34", word: "prognosis", phonetic: "/prɒɡˈnəʊsɪs/", zh: "預後", example: "Clear communication helps patients understand their prognosis.", exampleZh: "清晰溝通有助患者理解其預後。", category: "中醫英語", tags: ["clinical"] },
+  { id: "v35", word: "coherent", phonetic: "/kəʊˈhɪərənt/", zh: "連貫的", example: "A coherent IELTS response has a clear position and logical support.", exampleZh: "連貫的 IELTS 回答有清晰立場和合理支持。", category: "IELTS", tags: ["writing"] },
+  { id: "v36", word: "paraphrase", phonetic: "/ˈpærəfreɪz/", zh: "改寫", example: "Paraphrase the task statement instead of copying it word for word.", exampleZh: "改寫題目內容，不要逐字照抄。", category: "IELTS", tags: ["writing"] },
+  { id: "v37", word: "outweigh", phonetic: "/ˌaʊtˈweɪ/", zh: "超過；勝過", example: "The long-term benefits outweigh the short-term inconvenience.", exampleZh: "長期益處勝過短期不便。", category: "IELTS", tags: ["essay"] },
+  { id: "v38", word: "nuanced", phonetic: "/ˈnjuːɑːnst/", zh: "有細微差別的", example: "A nuanced answer recognises both benefits and limitations.", exampleZh: "細緻的回答會同時承認好處及限制。", category: "IELTS", tags: ["speaking"] },
+  { id: "v39", word: "exacerbate", phonetic: "/ɪɡˈzæsəbeɪt/", zh: "使惡化", example: "Excessive homework can exacerbate stress and sleep problems.", exampleZh: "過量功課會加劇壓力及睡眠問題。", category: "IELTS", tags: ["essay"] },
+  { id: "v40", word: "sustainable", phonetic: "/səˈsteɪnəbəl/", zh: "可持續的", example: "A sustainable routine is more valuable than an intense short-term plan.", exampleZh: "可持續的作息比高強度短期計劃更有價值。", category: "IELTS", tags: ["speaking"] },
+  { id: "v41", word: "predominantly", phonetic: "/prɪˈdɒmɪnəntli/", zh: "主要地", example: "The system is predominantly focused on measurable outcomes.", exampleZh: "該制度主要聚焦可量度的結果。", category: "IELTS", tags: ["writing"] },
+  { id: "v42", word: "marginalise", phonetic: "/ˈmɑːdʒɪnəlaɪz/", zh: "邊緣化", example: "An exam-only culture may marginalise creativity and wellbeing.", exampleZh: "只重考試的文化可能邊緣化創意及福祉。", category: "IELTS", tags: ["essay"] },
+  { id: "v43", word: "mitigate", phonetic: "/ˈmɪtɪɡeɪt/", zh: "減輕；緩和", example: "Schools can mitigate pressure by coordinating major deadlines.", exampleZh: "學校可透過協調重要截止日期緩和壓力。", category: "IELTS", tags: ["essay"] },
+  { id: "v44", word: "unprecedented", phonetic: "/ʌnˈpresɪdentɪd/", zh: "前所未有的", example: "Students face unprecedented access to information and distraction.", exampleZh: "學生面對前所未有的資訊及干擾。", category: "IELTS", tags: ["topic"] },
+  { id: "v45", word: "resilience", phonetic: "/rɪˈzɪliəns/", zh: "韌性；復原力", example: "Resilience grows through manageable challenges, not constant pressure.", exampleZh: "韌性來自可承受的挑戰，而非持續壓力。", category: "大學英語", tags: ["growth"] },
+  { id: "v46", word: "scrutinise", phonetic: "/ˈskruːtənaɪz/", zh: "仔細審視", example: "Before accepting a claim, scrutinise the quality of the evidence.", exampleZh: "接受論點前，要仔細審視證據質量。", category: "大學英語", tags: ["research"] },
+  { id: "v47", word: "alleviate", phonetic: "/əˈliːvieɪt/", zh: "減輕", example: "A structured revision plan can alleviate unnecessary anxiety.", exampleZh: "有結構的溫習計劃能減輕不必要焦慮。", category: "高考英語", tags: ["health"] },
+  { id: "v48", word: "integrity", phonetic: "/ɪnˈteɡrəti/", zh: "誠信；完整性", example: "Academic integrity requires students to acknowledge their sources.", exampleZh: "學術誠信要求學生註明資料來源。", category: "大學英語", tags: ["academic"] },
+  { id: "v49", word: "holistic", phonetic: "/həʊˈlɪstɪk/", zh: "整體性的", example: "TCM often adopts a holistic view of health and disease.", exampleZh: "中醫常以整體觀理解健康與疾病。", category: "中醫英語", tags: ["TCM"] },
+  { id: "v50", word: "differential diagnosis", phonetic: "/ˌdɪfərenʃl ˌdaɪəɡˈnəʊsɪs/", zh: "鑑別診斷", example: "Differential diagnosis prevents clinicians from overlooking alternative causes.", exampleZh: "鑑別診斷可避免臨床人員忽略其他病因。", category: "中醫英語", tags: ["clinical"] },
+  { id: "v51", word: "concession", phonetic: "/kənˈseʃn/", zh: "讓步；承認", example: "A well-placed concession makes an argument sound more credible.", exampleZh: "恰當讓步能令論證更可信。", category: "IELTS", tags: ["essay"] },
+  { id: "v52", word: "meticulous", phonetic: "/məˈtɪkjələs/", zh: "一絲不苟的", example: "Meticulous note-taking is useful during clinical observation.", exampleZh: "臨床觀察時，細緻記錄非常有用。", category: "中醫英語", tags: ["clinical"] }
 ];
 
 const templateItems = [
-  { id: "t01", topic: "Teenage Pressure", category: "高考英语", title: "青少年压力", paragraph: "Hong Kong has an ossified education system that focuses too much on academic results. Schools and parents force students to perform well. As a result, teenagers have little time to sleep or play. Like me, I often have sleepless nights because I have to go to school five or even six days a week.", zhExplanation: "用于写教育压力、学生睡眠、校园生活。结构是：制度问题 -> 外部压力 -> 结果 -> 个人例子。", patterns: ["[Place] has an ossified system that focuses too much on [result].", "As a result, teenagers have little time to [rest/play].", "Like me, I often [personal problem] because [reason]."], keywords: ["ossified", "academic results", "sleepless nights"], useCases: ["作文", "speaking", "大学英语"] },
-  { id: "t02", topic: "University Study", category: "大学英语", title: "大学学习", paragraph: "University study is different from secondary school because students have to manage their own time. A good student should not only attend lectures, but also review notes after class. If I can build this habit early, I will have less pressure before exams. Therefore, self-discipline is the key to a stable GPA.", zhExplanation: "用于大学学习、GPA、自律主题。", patterns: ["[Topic] is different from [old stage] because...", "A good student should not only..., but also...", "Therefore, self-discipline is the key to..."], keywords: ["manage", "review", "self-discipline"], useCases: ["大学英语", "作文"] },
-  { id: "t03", topic: "TCM Learning", category: "中医英语", title: "中医学习", paragraph: "Traditional Chinese medicine is difficult at first because many ideas are abstract. For example, qi, blood and meridians cannot be understood only by memorising words. Students need to connect theory with cases. In this way, TCM becomes a practical medical system rather than a list of terms.", zhExplanation: "用于解释中医学习难点。", patterns: ["[Subject] is difficult at first because...", "Students need to connect theory with cases.", "In this way, [subject] becomes practical."], keywords: ["abstract", "meridians", "practical"], useCases: ["中医英语", "speaking"] },
-  { id: "t04", topic: "Acupuncture", category: "中医英语", title: "针灸介绍", paragraph: "Acupuncture is an important part of traditional Chinese medicine. It uses specific points on meridians to regulate the body. Many patients choose acupuncture because it may reduce pain and improve sleep. However, it should be performed carefully by trained practitioners.", zhExplanation: "用于介绍针灸、治疗、安全。", patterns: ["[Therapy] is an important part of...", "It uses [method] to regulate the body.", "However, it should be performed carefully by..."], keywords: ["acupuncture", "meridians", "practitioners"], useCases: ["中医英语", "口语介绍"] },
-  { id: "t05", topic: "Healthy Lifestyle", category: "高考英语", title: "健康生活", paragraph: "A healthy lifestyle is not about doing one big thing perfectly. It is about small habits, such as sleeping earlier, eating regularly and doing exercise. These habits may look simple, but they protect both the body and the mind. For students, health is the basis of better learning.", zhExplanation: "用于健康、习惯、学生生活。", patterns: ["[Topic] is not about..., it is about...", "These habits may look simple, but...", "For students, [A] is the basis of [B]."], keywords: ["lifestyle", "regularly", "basis"], useCases: ["高考英语", "作文"] },
-  { id: "t06", topic: "Technology", category: "IELTS", title: "科技影响", paragraph: "Technology makes learning more convenient because students can find information quickly. However, it can also reduce concentration if students spend too much time on short videos. In my view, technology itself is not the problem. The real issue is whether students can use it with clear goals.", zhExplanation: "用于科技利弊、网络、学习。", patterns: ["Technology makes [activity] more convenient because...", "However, it can also...", "The real issue is whether..."], keywords: ["convenient", "concentration", "clear goals"], useCases: ["IELTS", "作文"] },
-  { id: "t07", topic: "Family Education", category: "高考英语", title: "家庭教育", paragraph: "Parents usually push their children because they want them to have a better future. This intention is understandable, but too much pressure may damage the parent-child relationship. Instead of only asking for high marks, parents should listen to their children. Support is often more useful than criticism.", zhExplanation: "用于父母压力、亲子关系。", patterns: ["This intention is understandable, but...", "Instead of only..., parents should...", "[Support] is often more useful than [criticism]."], keywords: ["intention", "relationship", "support"], useCases: ["高考英语", "speaking"] },
-  { id: "t08", topic: "City Life", category: "IELTS", title: "城市生活", paragraph: "City life gives young people more opportunities, such as better schools, hospitals and jobs. At the same time, it can be noisy, expensive and stressful. I think the best city is not the biggest one, but the one that gives people a balanced life. Public spaces and affordable housing are therefore very important.", zhExplanation: "用于城市、生活质量、政策。", patterns: ["[Place] gives people more opportunities, such as...", "At the same time, it can be...", "The best [place] is not..., but..."], keywords: ["opportunities", "balanced", "affordable"], useCases: ["IELTS", "作文"] },
-  { id: "t09", topic: "Learning English", category: "大学英语", title: "学习英文", paragraph: "Learning English should not begin with difficult grammar rules. It should begin with useful words and repeatable sentences. When I can say one simple idea clearly, I can slowly make it more advanced. This is a more realistic way to build confidence.", zhExplanation: "用于英语学习方法、自信。", patterns: ["Learning [skill] should not begin with...", "It should begin with...", "When I can..., I can slowly..."], keywords: ["repeatable", "advanced", "confidence"], useCases: ["大学英语", "speaking"] },
-  { id: "t10", topic: "Medical Career", category: "中医英语", title: "医学职业", paragraph: "A good doctor needs both knowledge and communication skills. Medical knowledge helps the doctor make safer decisions. Communication helps patients understand their condition and treatment. Therefore, English can also be useful for future medical study and international exchange.", zhExplanation: "用于医学职业、沟通、英语价值。", patterns: ["A good [role] needs both [A] and [B].", "[A] helps..., [B] helps...", "Therefore, English can also be useful for..."], keywords: ["communication", "condition", "international exchange"], useCases: ["中医英语", "大学英语"] },
-  { id: "t11", topic: "Exam Preparation", category: "IELTS", title: "备考方法", paragraph: "Preparing for an exam is not just about spending long hours at a desk. Students need to know their weak points and practise them deliberately. For example, if writing is weak, copying useful sentence patterns is more helpful than reading random articles. A clear strategy saves time and reduces anxiety.", zhExplanation: "用于备考、弱项、策略。", patterns: ["Preparing for [exam] is not just about...", "Students need to know their weak points and...", "A clear strategy saves time and..."], keywords: ["deliberately", "random", "strategy"], useCases: ["IELTS", "大学英语"] },
-  { id: "t12", topic: "Sleep", category: "高考英语", title: "睡眠", paragraph: "Sleep is often ignored by students, but it directly affects memory and mood. If teenagers sleep too late every night, they may find it harder to focus in class. Schools should avoid giving too much homework, and students should stop using phones before bed. Better sleep can lead to better learning.", zhExplanation: "用于睡眠、健康、学习效率。", patterns: ["[Topic] is often ignored, but it directly affects...", "If teenagers..., they may find it harder to...", "Better [A] can lead to better [B]."], keywords: ["ignored", "memory", "focus"], useCases: ["高考英语", "speaking"] }
+  { id: "t01", topic: "Teenage Pressure", category: "高考英語", title: "Education and adolescent pressure", paragraph: "Hong Kong has an ossified education system that focuses too much on academic results. Schools and parents often push students to perform well. As a consequence, many teenagers have little time to sleep, exercise or simply recover. Like me, some students experience sleepless nights during busy school weeks.", zhExplanation: "適用於教育壓力、學生睡眠、校園生活。結構：制度問題 → 壓力來源 → 後果 → 個人例子。", patterns: ["[Place] has an ossified system that focuses too much on [result].", "As a consequence, [group] have little time to [activity].", "Like me, some [group] experience [problem]."], keywords: ["ossified", "academic results", "sleepless nights"], useCases: ["Essay", "Speaking", "大學英語"] },
+  { id: "t02", topic: "University Study", category: "大學英語", title: "Independent learning", paragraph: "University study demands more than attending lectures. Students must allocate time independently, review material strategically and seek feedback before problems accumulate. In my view, self-discipline is not about studying all day; it is about making the next useful decision consistently.", zhExplanation: "適用於 GPA、學習方法、自律。語氣成熟，適合大學寫作或面試。", patterns: ["[Activity] demands more than...", "Students must [verb], [verb] and [verb].", "[Quality] is not about..., it is about..."], keywords: ["allocate", "strategically", "consistently"], useCases: ["University essay", "Interview"] },
+  { id: "t03", topic: "TCM Learning", category: "中醫英語", title: "Learning Traditional Chinese Medicine", paragraph: "Traditional Chinese medicine can appear abstract at first because concepts such as qi, blood and meridians are interconnected. However, theory becomes more intelligible when students relate it to clinical cases, tongue findings and pulse patterns. This is how memorisation gradually develops into clinical reasoning.", zhExplanation: "適用於介紹中醫學習、專業課程或臨床思維。", patterns: ["[Subject] can appear abstract because...", "Theory becomes more intelligible when...", "This is how [A] develops into [B]."], keywords: ["interconnected", "clinical reasoning", "intelligible"], useCases: ["TCM presentation", "Speaking"] },
+  { id: "t04", topic: "Acupuncture", category: "中醫英語", title: "Introducing acupuncture", paragraph: "Acupuncture is a therapeutic modality within traditional Chinese medicine. It involves the stimulation of specific points and should be delivered by appropriately trained practitioners. Patients may seek acupuncture for pain management, sleep difficulties or functional symptoms, but treatment must always take safety and individual presentation into account.", zhExplanation: "適用於針灸介紹、臨床英文、向外國人說明專業內容。", patterns: ["[Therapy] is a therapeutic modality within...", "It involves... and should be...", "Treatment must take [A] and [B] into account."], keywords: ["therapeutic modality", "practitioners", "presentation"], useCases: ["TCM English", "Clinical communication"] },
+  { id: "t05", topic: "Sleep", category: "高考英語", title: "Sleep as a learning resource", paragraph: "Sleep is often treated as negotiable when students are under pressure, yet it directly affects memory, mood and concentration. Cutting sleep may create the illusion of productivity in the short term, but the academic cost is often substantial. Schools and families should therefore protect a routine that students can sustain.", zhExplanation: "適用於睡眠、健康、學習效率。", patterns: ["[Topic] is often treated as..., yet it affects...", "[Action] may create the illusion of..., but...", "[Group] should protect..."], keywords: ["negotiable", "illusion", "sustain"], useCases: ["Essay", "Speaking"] },
+  { id: "t06", topic: "Technology", category: "IELTS", title: "Technology and concentration", paragraph: "Digital technology has made information more accessible, but accessibility is not the same as understanding. When students move constantly between messages, videos and notes, their attention becomes fragmented. The key issue is whether technology is being used deliberately rather than habitually.", zhExplanation: "適用於科技利弊、專注力、數碼生活。", patterns: ["[A] has made [B] more accessible, but...", "When [group]..., [result].", "The key issue is whether..."], keywords: ["accessible", "fragmented", "deliberately"], useCases: ["IELTS Task 2", "Speaking"] },
+  { id: "t07", topic: "Family Education", category: "高考英語", title: "Parental expectations", paragraph: "Parents usually place high expectations on their children because they want to secure a better future. That intention is understandable; nevertheless, excessive pressure can undermine confidence and communication. Instead of focusing exclusively on marks, parents should help young people develop judgement, resilience and a realistic sense of progress.", zhExplanation: "適用於家庭教育、親子關係、教育壓力。", patterns: ["That intention is understandable; nevertheless,...", "Instead of [verb-ing], [group] should...", "develop [A], [B] and [C]"], keywords: ["expectations", "undermine", "resilience"], useCases: ["Writing", "Speaking"] },
+  { id: "t08", topic: "City Life", category: "IELTS", title: "A liveable city", paragraph: "A successful city offers more than employment opportunities and efficient transport. It should also provide affordable housing, accessible green space and a reasonable pace of life. Economic growth matters, but it should not come at the expense of residents' wellbeing.", zhExplanation: "適用於城市生活、公共政策、生活質素。", patterns: ["A successful [place] offers more than...", "It should also provide...", "[A] matters, but it should not come at the expense of [B]."], keywords: ["accessible", "pace of life", "at the expense of"], useCases: ["IELTS Task 2"] },
+  { id: "t09", topic: "Learning English", category: "大學英語", title: "Building usable English", paragraph: "Learning English becomes more efficient when it begins with language that can be reused. Instead of collecting isolated words, students should learn collocations, sentence patterns and short paragraphs with a clear purpose. Fluency is not a performance of difficult vocabulary; it is the ability to express a useful idea precisely.", zhExplanation: "適用於談英文學習方法；這也是本網站的核心學習邏輯。", patterns: ["[Skill] becomes more efficient when...", "Instead of..., students should...", "[Quality] is not..., it is..."], keywords: ["collocations", "fluency", "precisely"], useCases: ["Speaking", "University writing"] },
+  { id: "t10", topic: "Medical Career", category: "中醫英語", title: "Medicine and communication", paragraph: "A competent clinician requires both technical knowledge and the capacity to communicate with clarity. Knowledge informs diagnosis and treatment, while communication helps patients understand risk, choice and follow-up. For this reason, medical English is not merely an examination subject; it is part of professional practice.", zhExplanation: "適用於醫學職業規劃、英文面試、中醫英語。", patterns: ["A competent [role] requires both...", "[A] informs..., while [B] helps...", "[A] is not merely..., it is..."], keywords: ["competent", "follow-up", "professional practice"], useCases: ["Interview", "TCM English"] },
+  { id: "t11", topic: "Exam Preparation", category: "IELTS", title: "Strategic preparation", paragraph: "Effective examination preparation is diagnostic rather than merely repetitive. Students need to identify weak areas, practise them deliberately and review their errors with precision. A clear strategy reduces wasted effort and makes progress easier to measure.", zhExplanation: "適用於備考方法、IELTS 或大學考試。", patterns: ["[Activity] is [A] rather than [B].", "Students need to [A], [B] and [C].", "A clear strategy..."], keywords: ["diagnostic", "deliberately", "precision"], useCases: ["IELTS", "Study plan"] },
+  { id: "t12", topic: "Public Health", category: "大學英語", title: "Prevention before crisis", paragraph: "Public health measures are most valuable when they prevent a problem before it becomes a crisis. Education, early screening and accessible services may appear less dramatic than emergency treatment, but they often produce more sustainable outcomes. Prevention is therefore an investment rather than an expense.", zhExplanation: "適用於健康、社會政策、醫學相關作文。", patterns: ["[Measure] is most valuable when...", "[A] may appear less..., but...", "[A] is an investment rather than..."], keywords: ["screening", "sustainable outcomes", "prevention"], useCases: ["University essay", "IELTS"] }
 ];
 
 const patternItems = [
-  { category: "大学英语", title: "表达原因", en: "This is mainly because...", zh: "这主要是因为..." },
-  { category: "大学英语", title: "表达结果", en: "As a result, students may...", zh: "结果，学生可能会..." },
-  { category: "高考英语", title: "给建议", en: "It is better for students to...", zh: "学生最好..." },
-  { category: "高考英语", title: "个人例子", en: "Like me, many teenagers...", zh: "像我一样，很多青少年..." },
-  { category: "中医英语", title: "介绍概念", en: "In traditional Chinese medicine, ... refers to...", zh: "在中医里，... 指的是..." },
-  { category: "中医英语", title: "说明治疗", en: "This treatment aims to...", zh: "这种治疗旨在..." },
-  { category: "IELTS", title: "平衡观点", en: "A more balanced view is that...", zh: "更平衡的看法是..." },
-  { category: "IELTS", title: "强调重点", en: "The key issue is not..., but...", zh: "关键问题不是...，而是..." }
+  { category: "大學英語", title: "Explaining cause", en: "This can largely be attributed to...", zh: "這在很大程度上可歸因於……" },
+  { category: "大學英語", title: "Qualifying a claim", en: "This does not necessarily mean that...", zh: "這不一定代表……" },
+  { category: "高考英語", title: "Offering advice", en: "A more constructive approach would be to...", zh: "更有建設性的做法是……" },
+  { category: "高考英語", title: "Personal example", en: "From my own experience, I have found that...", zh: "以我的經驗，我發現……" },
+  { category: "中醫英語", title: "Explaining a TCM concept", en: "In traditional Chinese medicine, ... refers to...", zh: "在中醫理論中，……指的是……" },
+  { category: "中醫英語", title: "Discussing treatment", en: "The therapeutic aim is to alleviate... while restoring...", zh: "治療目標是在恢復……時同時緩解……" },
+  { category: "IELTS", title: "Balanced view", en: "A more nuanced view is that...", zh: "更細緻的觀點是……" },
+  { category: "IELTS", title: "Concession", en: "Although this concern is valid, it overlooks the fact that...", zh: "雖然這個憂慮有道理，但它忽略了……" }
 ];
 
 const quizItems = [
-  { id: "q1", type: "单词测试", category: "高考英语", prompt: "pressure 的中文意思是？", options: ["压力", "机会", "习惯", "环境"], answer: "压力", explanation: "pressure = 压力，常用于 exam pressure / family pressure。" },
-  { id: "q2", type: "中英配对", category: "中医英语", prompt: "“经络” 对应哪个英文？", options: ["pulse", "meridian", "fatigue", "policy"], answer: "meridian", explanation: "meridian = 经络；pulse = 脉象。" },
-  { id: "q3", type: "句子补全", category: "IELTS", prompt: "The real issue is ___ students can use technology with clear goals.", options: ["whether", "although", "because", "unless"], answer: "whether", explanation: "whether 引导“是否”的宾语从句。" },
-  { id: "q4", type: "单词测试", category: "大学英语", prompt: "deadline 最准确的意思是？", options: ["截止日期", "研讨课", "证据", "讲座"], answer: "截止日期", explanation: "deadline = 截止日期，大学作业常用词。" },
-  { id: "q5", type: "中英配对", category: "中医英语", prompt: "“失眠” 对应哪个英文？", options: ["insomnia", "deficiency", "coherent", "urban"], answer: "insomnia", explanation: "insomnia = 失眠。" }
+  { id: "q1", type: "單詞測試", category: "大學英語", prompt: "Which word means 'to support a claim with evidence'?", options: ["substantiate", "allocate", "cultivate", "mitigate"], answer: "substantiate", explanation: "substantiate = 以證據支持或證實論點。" },
+  { id: "q2", type: "中英配對", category: "中醫英語", prompt: "「辨證」最準確對應哪個英文？", options: ["syndrome differentiation", "differential diagnosis", "tongue coating", "clinical reasoning"], answer: "syndrome differentiation", explanation: "syndrome differentiation 是中醫語境中的「辨證」。" },
+  { id: "q3", type: "Sentence completion", category: "IELTS", prompt: "The key issue is ___ technology is used deliberately rather than habitually.", options: ["whether", "although", "unless", "because"], answer: "whether", explanation: "whether 引導「是否」的名詞子句。" },
+  { id: "q4", type: "單詞測試", category: "高考英語", prompt: "Which word means 'to make a problem worse'?", options: ["exacerbate", "alleviate", "empower", "persevere"], answer: "exacerbate", explanation: "exacerbate = 使問題惡化或加劇。" },
+  { id: "q5", type: "中英配對", category: "中醫英語", prompt: "「禁忌證」對應哪個英文？", options: ["contraindication", "prognosis", "constitution", "palpation"], answer: "contraindication", explanation: "contraindication = 不適宜使用某種治療的情況。" }
 ];
 
 const insertSnippets = {
-  writing: "Hong Kong has an ossified education system that focuses too much on academic results. Schools and parents force students to perform well. As a result, teenagers have little time to sleep or play. Like me, I often have sleepless nights because I have to go to school five or even six days a week.",
-  balanced: "Some people believe that exam results are necessary because they show how hard students work. However, others argue that too much pressure can harm teenagers' sleep and mental health. In my view, schools should keep exams but reduce unnecessary homework. This would help students learn better without losing balance."
+  pressure: "Hong Kong has an ossified education system that focuses too much on academic results. Schools and parents often push students to perform well. As a consequence, many teenagers have little time to sleep, exercise or simply recover.",
+  balanced: "Although examination results provide a useful benchmark, they should not become the sole measure of a student's potential. A more balanced approach would value progress, wellbeing and the capacity to learn independently."
 };
 
-const defaultState = {
-  knownWords: {},
-  daily: {},
-  quiz: { correct: 0, attempts: 0 },
-  writingDraft: "",
-  writingCorrection: "",
-  speakingNotes: "",
-  maskedTemplates: false
-};
-
+const defaultState = { knownWords: {}, daily: {}, quiz: { correct: 0, attempts: 0 }, writingDraft: "", writingCorrection: "", speakingNotes: "", maskedTemplates: false };
 const state = loadState();
 
-function loadState() {
-  try {
-    return { ...defaultState, ...JSON.parse(localStorage.getItem(stateKey) || "{}") };
-  } catch {
-    return { ...defaultState };
-  }
-}
-
-function saveState() {
-  localStorage.setItem(stateKey, JSON.stringify(state));
-  updateStats();
-}
-
-function selectBritishVoice() {
-  if (!availableVoices.length) availableVoices = speechSynthesis.getVoices();
-  return (
-    availableVoices.find((voice) => voice.lang === "en-GB" && /Google|Microsoft|Daniel|Serena|UK/i.test(voice.name)) ||
-    availableVoices.find((voice) => voice.lang === "en-GB") ||
-    availableVoices.find((voice) => /^en/.test(voice.lang)) ||
-    null
-  );
-}
-
-function speakText(text) {
-  if (!("speechSynthesis" in window)) {
-    document.getElementById("voiceStatus").textContent = "浏览器不支持发音";
-    return;
-  }
-  speechSynthesis.cancel();
-  const utterance = new SpeechSynthesisUtterance(text);
-  const voice = selectBritishVoice();
-  if (voice) utterance.voice = voice;
-  utterance.lang = voice?.lang || "en-GB";
-  utterance.rate = 0.82;
-  utterance.pitch = 1;
-  speechSynthesis.speak(utterance);
-}
-
-function updateVoiceStatus() {
-  if (!("speechSynthesis" in window)) {
-    document.getElementById("voiceStatus").textContent = "浏览器不支持发音";
-    return;
-  }
-  availableVoices = speechSynthesis.getVoices();
-  const voice = selectBritishVoice();
-  document.getElementById("voiceStatus").textContent = voice ? `British voice: ${voice.name}` : "未找到英式语音，使用默认英文";
-}
-
-function filteredItems(items) {
-  return selectedCategory === "all" ? items : items.filter((item) => item.category === selectedCategory);
-}
+function loadState() { try { return { ...defaultState, ...JSON.parse(localStorage.getItem(stateKey) || "{}") }; } catch { return { ...defaultState }; } }
+function saveState() { localStorage.setItem(stateKey, JSON.stringify(state)); updateStats(); }
+function selectBritishVoice() { if (!availableVoices.length) availableVoices = speechSynthesis.getVoices(); return availableVoices.find((v) => v.lang === "en-GB" && /Google|Microsoft|Daniel|Serena|UK/i.test(v.name)) || availableVoices.find((v) => v.lang === "en-GB") || availableVoices.find((v) => /^en/.test(v.lang)) || null; }
+function speakText(text) { if (!("speechSynthesis" in window)) { document.getElementById("voiceStatus").textContent = "Voice support is unavailable in this browser."; return; } speechSynthesis.cancel(); const utterance = new SpeechSynthesisUtterance(text); const voice = selectBritishVoice(); if (voice) utterance.voice = voice; utterance.lang = voice?.lang || "en-GB"; utterance.rate = 0.82; utterance.pitch = 1; speechSynthesis.speak(utterance); }
+function updateVoiceStatus() { if (!("speechSynthesis" in window)) { document.getElementById("voiceStatus").textContent = "Voice support is unavailable."; return; } availableVoices = speechSynthesis.getVoices(); const voice = selectBritishVoice(); document.getElementById("voiceStatus").textContent = voice ? `British voice: ${voice.name}` : "English voice fallback in use"; }
+function filteredItems(items) { return selectedCategory === "all" ? items : items.filter((item) => item.category === selectedCategory); }
 
 function renderVocabulary() {
   const query = document.getElementById("wordSearch").value.trim().toLowerCase();
-  const words = filteredItems(vocabularyItems).filter((item) => {
-    const text = `${item.word} ${item.zh} ${item.category} ${item.tags.join(" ")}`.toLowerCase();
-    return text.includes(query);
-  });
-  document.getElementById("wordGrid").innerHTML = words
-    .map((item) => {
-      const known = Boolean(state.knownWords[item.id]);
-      return `
-        <article class="word-card" data-word-id="${item.id}">
-          <div class="word-head">
-            <div class="word-title">
-              <h4>${item.word}</h4>
-              <span class="phonetic">${item.phonetic}</span>
-            </div>
-            <button class="sound-button" data-speak="${escapeAttr(item.word)}">▶</button>
-          </div>
-          <span class="tag">${item.category}</span>
-          <p class="meaning"><strong>${item.zh}</strong></p>
-          <p>${item.example}</p>
-          <p class="zh-block">${item.exampleZh}</p>
-          <div class="card-actions">
-            <button class="plain-button" data-toggle-meaning="${item.id}">显示/隐藏中文</button>
-            <button class="plain-button" data-known="${item.id}">${known ? "已认识" : "标记认识"}</button>
-            <button class="sound-button" data-speak="${escapeAttr(item.example)}">朗读例句</button>
-          </div>
-        </article>
-      `;
-    })
-    .join("");
+  const words = filteredItems(vocabularyItems).filter((item) => `${item.word} ${item.zh} ${item.category} ${item.tags.join(" ")}`.toLowerCase().includes(query));
+  document.getElementById("wordGrid").innerHTML = words.map((item) => `<article class="word-card" data-word-id="${item.id}"><div class="word-head"><div><h3>${item.word}</h3><span class="phonetic">${item.phonetic}</span></div><button class="sound-button" data-speak="${item.word}. ${item.example}" aria-label="Listen to ${item.word}">Listen</button></div><span class="tag">${item.category}</span><p class="meaning"><strong>${item.zh}</strong></p><p>${item.example}</p><p class="meaning">${item.exampleZh}</p><div class="card-actions"><button class="text-button meaning-toggle">Meaning</button><button class="text-button known-button ${state.knownWords[item.id] ? "is-known" : ""}">${state.knownWords[item.id] ? "Known" : "Mark known"}</button></div></article>`).join("") || `<p class="translation">No vocabulary matches this search.</p>`;
 }
+function renderPatterns() { document.getElementById("patternGrid").innerHTML = filteredItems(patternItems).map((item) => `<article class="pattern-card"><span class="tag">${item.category}</span><h3>${item.en}</h3><p>${item.zh}</p><button class="sound-button wide" data-speak="${item.en}">Listen</button></article>`).join(""); }
+function renderTemplates() { const grid = document.getElementById("templateGrid"); grid.classList.toggle("templates-masked", state.maskedTemplates); grid.innerHTML = filteredItems(templateItems).map((item) => `<article class="template-card"><div class="template-meta"><span class="tag">${item.category}</span><span class="tag">${item.topic}</span></div><h3>${item.title}</h3><p class="template-copy">${item.paragraph}</p><p class="template-translation">${item.zhExplanation}</p><p class="template-detail"><strong>Patterns:</strong> ${item.patterns.join(" ")}</p><p class="template-detail"><strong>Keywords:</strong> ${item.keywords.join(" · ")}</p><div class="card-actions"><button class="sound-button wide" data-speak="${item.paragraph}">Listen</button></div></article>`).join(""); }
+function renderQuiz() { const item = quizItems[currentQuizIndex]; document.getElementById("quizCard").innerHTML = `<span class="topic-tag">${item.type} · ${item.category}</span><h3>${item.prompt}</h3><div class="quiz-options">${item.options.map((option) => `<button class="quiz-option" data-option="${option}">${option}</button>`).join("")}</div><p class="quiz-result" id="quizResult"></p>`; }
+function checkQuizAnswer(option, button) { const item = quizItems[currentQuizIndex]; const correct = option === item.answer; state.quiz.attempts += 1; if (correct) state.quiz.correct += 1; document.querySelectorAll(".quiz-option").forEach((node) => { node.disabled = true; if (node.dataset.option === item.answer) node.classList.add("correct"); }); if (!correct) button.classList.add("wrong"); document.getElementById("quizResult").textContent = `${correct ? "Correct." : "Not quite."} ${item.explanation}`; saveState(); }
+function updateStats() { const known = Object.keys(state.knownWords).length; document.getElementById("wordTotal").textContent = vocabularyItems.length; document.getElementById("templateTotal").textContent = templateItems.length; document.getElementById("knownTotal").textContent = known; document.getElementById("knownProgress").textContent = `${known} / ${vocabularyItems.length}`; document.getElementById("knownMeter").style.width = `${(known / vocabularyItems.length) * 100}%`; document.getElementById("quizScore").textContent = `${state.quiz.correct} correct / ${state.quiz.attempts} attempts`; document.getElementById("draftPreview").textContent = state.writingDraft ? `${state.writingDraft.slice(0, 180)}${state.writingDraft.length > 180 ? "..." : ""}` : "No saved draft yet."; }
+function setPanel(panel) { document.querySelectorAll(".nav-item").forEach((node) => node.classList.toggle("active", node.dataset.panel === panel)); document.querySelectorAll(".panel").forEach((node) => node.classList.toggle("active", node.id === `${panel}-panel`)); window.scrollTo({ top: 0, behavior: "smooth" }); }
+function resetTimer() { clearInterval(timerId); timerId = null; timerSeconds = 120; document.getElementById("timerText").textContent = "02:00"; document.getElementById("startTimer").textContent = "Start"; }
+function startTimer() { if (timerId) { resetTimer(); return; } document.getElementById("startTimer").textContent = "Reset"; timerId = setInterval(() => { timerSeconds -= 1; document.getElementById("timerText").textContent = `${String(Math.floor(timerSeconds / 60)).padStart(2, "0")}:${String(timerSeconds % 60).padStart(2, "0")}`; if (timerSeconds <= 0) { speakText("Time is up."); resetTimer(); } }, 1000); }
 
-function renderPatterns() {
-  document.getElementById("patternGrid").innerHTML = filteredItems(patternItems)
-    .map(
-      (item) => `
-        <article class="pattern-card">
-          <span class="tag">${item.category}</span>
-          <h4>${item.title}</h4>
-          <p class="english-block">${item.en}</p>
-          <p class="zh-block">${item.zh}</p>
-          <button class="sound-button wide" data-speak="${escapeAttr(item.en)}">朗读句式</button>
-        </article>
-      `
-    )
-    .join("");
-}
+document.addEventListener("click", (event) => {
+  const panelButton = event.target.closest(".nav-item"); if (panelButton) setPanel(panelButton.dataset.panel);
+  const filter = event.target.closest(".filter-chip"); if (filter) { selectedCategory = filter.dataset.filter; document.querySelectorAll(".filter-chip").forEach((node) => node.classList.toggle("active", node === filter)); renderVocabulary(); renderPatterns(); renderTemplates(); }
+  const speakButton = event.target.closest("[data-speak]"); if (speakButton) speakText(speakButton.dataset.speak);
+  const meaningButton = event.target.closest(".meaning-toggle"); if (meaningButton) meaningButton.closest(".word-card").classList.toggle("show-meaning");
+  const knownButton = event.target.closest(".known-button"); if (knownButton) { const card = knownButton.closest(".word-card"); const id = card.dataset.wordId; state.knownWords[id] ? delete state.knownWords[id] : (state.knownWords[id] = true); saveState(); renderVocabulary(); }
+  const option = event.target.closest(".quiz-option"); if (option && !option.disabled) checkQuizAnswer(option.dataset.option, option);
+  const insert = event.target.closest("[data-insert]"); if (insert) { const field = document.getElementById("writingDraft"); field.value = `${field.value}${field.value ? "\n\n" : ""}${insertSnippets[insert.dataset.insert]}`; state.writingDraft = field.value; saveState(); }
+});
 
-function renderTemplates() {
-  const holder = document.getElementById("templateGrid");
-  holder.classList.toggle("templates-masked", state.maskedTemplates);
-  holder.innerHTML = filteredItems(templateItems)
-    .map(
-      (item) => `
-        <article class="template-card">
-          <div class="template-meta">
-            <span class="tag">${item.category}</span>
-            ${item.useCases.map((use) => `<span class="tag">${use}</span>`).join("")}
-          </div>
-          <h4>${item.title} · ${item.topic}</h4>
-          <p class="english-block">${item.paragraph}</p>
-          <p class="zh-block template-zh">${item.zhExplanation}</p>
-          <ul class="pattern-list">${item.patterns.map((pattern) => `<li>${pattern}</li>`).join("")}</ul>
-          <p><strong>Keywords:</strong> ${item.keywords.join(", ")}</p>
-          <button class="sound-button wide" data-speak="${escapeAttr(item.paragraph)}">朗读模板</button>
-        </article>
-      `
-    )
-    .join("");
-}
+document.querySelectorAll(".nav-item").forEach((button) => button.addEventListener("click", () => setPanel(button.dataset.panel)));
+document.getElementById("wordSearch").addEventListener("input", renderVocabulary);
+document.getElementById("randomWord").addEventListener("click", () => { const candidates = filteredItems(vocabularyItems); const item = candidates[Math.floor(Math.random() * candidates.length)]; document.getElementById("wordSearch").value = item.word; setPanel("vocabulary"); renderVocabulary(); document.querySelector(".word-card")?.classList.add("show-meaning"); });
+document.getElementById("toggleTemplateMask").addEventListener("click", () => { state.maskedTemplates = !state.maskedTemplates; document.getElementById("toggleTemplateMask").textContent = state.maskedTemplates ? "Show translations" : "Hide translations"; saveState(); renderTemplates(); });
+document.getElementById("revealReading").addEventListener("click", (event) => { const answers = document.getElementById("readingAnswers"); answers.hidden = !answers.hidden; event.currentTarget.textContent = answers.hidden ? "Show answers" : "Hide answers"; });
+document.getElementById("saveWriting").addEventListener("click", () => { state.writingDraft = document.getElementById("writingDraft").value; state.writingCorrection = document.getElementById("writingCorrection").value; saveState(); document.getElementById("saveWriting").textContent = "Saved"; setTimeout(() => { document.getElementById("saveWriting").textContent = "Save draft"; }, 1200); });
+document.getElementById("writingDraft").addEventListener("input", (event) => { state.writingDraft = event.target.value; saveState(); });
+document.getElementById("writingCorrection").addEventListener("input", (event) => { state.writingCorrection = event.target.value; saveState(); });
+document.getElementById("speakingNotes").addEventListener("input", (event) => { state.speakingNotes = event.target.value; saveState(); });
+document.getElementById("startTimer").addEventListener("click", startTimer);
+document.getElementById("nextQuiz").addEventListener("click", () => { currentQuizIndex = (currentQuizIndex + 1) % quizItems.length; renderQuiz(); });
+document.getElementById("resetDaily").addEventListener("click", () => { state.daily = {}; document.querySelectorAll("[data-daily]").forEach((box) => { box.checked = false; }); saveState(); });
+document.querySelectorAll("[data-daily]").forEach((box) => { box.checked = Boolean(state.daily[box.dataset.daily]); box.addEventListener("change", () => { state.daily[box.dataset.daily] = box.checked; saveState(); }); });
+document.getElementById("clearData").addEventListener("click", () => { localStorage.removeItem(stateKey); Object.assign(state, JSON.parse(JSON.stringify(defaultState))); document.getElementById("writingDraft").value = ""; document.getElementById("writingCorrection").value = ""; document.getElementById("speakingNotes").value = ""; renderVocabulary(); renderTemplates(); updateStats(); });
 
-function renderQuiz() {
-  const pool = filteredItems(quizItems);
-  const item = pool[currentQuizIndex % pool.length] || quizItems[0];
-  document.getElementById("quizCard").innerHTML = `
-    <span class="tag">${item.category} · ${item.type}</span>
-    <h4>${item.prompt}</h4>
-    <div class="quiz-options">
-      ${item.options.map((option) => `<button class="quiz-option" data-answer="${escapeAttr(option)}">${option}</button>`).join("")}
-    </div>
-    <p class="quiz-result" id="quizResult"></p>
-  `;
-}
-
-function checkQuizAnswer(selected) {
-  const pool = filteredItems(quizItems);
-  const item = pool[currentQuizIndex % pool.length] || quizItems[0];
-  const correct = selected === item.answer;
-  state.quiz.attempts += 1;
-  if (correct) state.quiz.correct += 1;
-  saveState();
-  document.querySelectorAll(".quiz-option").forEach((button) => {
-    button.disabled = true;
-    button.classList.toggle("correct", button.dataset.answer === item.answer);
-    button.classList.toggle("wrong", button.dataset.answer === selected && !correct);
-  });
-  document.getElementById("quizResult").textContent = `${correct ? "正确" : "不对"}：${item.explanation}`;
-}
-
-function switchPanel(panelId) {
-  document.querySelectorAll(".nav-item").forEach((button) => button.classList.toggle("active", button.dataset.panel === panelId));
-  document.querySelectorAll(".panel").forEach((panel) => panel.classList.toggle("active", panel.id === panelId));
-}
-
-function updateStats() {
-  const known = Object.values(state.knownWords).filter(Boolean).length;
-  document.getElementById("wordTotal").textContent = String(vocabularyItems.length);
-  document.getElementById("templateTotal").textContent = String(templateItems.length);
-  document.getElementById("knownTotal").textContent = String(known);
-  document.getElementById("knownText").textContent = `${known} / ${vocabularyItems.length} words marked known.`;
-  document.getElementById("knownMeter").style.width = `${Math.round((known / vocabularyItems.length) * 100)}%`;
-  document.getElementById("quizScore").textContent = `${state.quiz.correct} correct / ${state.quiz.attempts} attempts`;
-  document.getElementById("draftPreview").textContent = state.writingDraft || "还没有保存草稿。";
-}
-
-function hydrateFields() {
-  for (const id of ["writingDraft", "writingCorrection", "speakingNotes"]) {
-    const field = document.getElementById(id);
-    field.value = state[id] || "";
-    field.addEventListener("input", () => {
-      state[id] = field.value;
-      saveState();
-    });
-  }
-  document.querySelectorAll("[data-daily]").forEach((input) => {
-    input.checked = Boolean(state.daily[input.dataset.daily]);
-    input.addEventListener("change", () => {
-      state.daily[input.dataset.daily] = input.checked;
-      saveState();
-    });
-  });
-}
-
-function bindEvents() {
-  document.querySelectorAll(".nav-item").forEach((button) => button.addEventListener("click", () => switchPanel(button.dataset.panel)));
-  document.querySelectorAll(".filter-chip").forEach((button) => {
-    button.addEventListener("click", () => {
-      selectedCategory = button.dataset.filter;
-      document.querySelectorAll(".filter-chip").forEach((chip) => chip.classList.toggle("active", chip === button));
-      renderVocabulary();
-      renderPatterns();
-      renderTemplates();
-      currentQuizIndex = 0;
-      renderQuiz();
-    });
-  });
-  document.addEventListener("click", (event) => {
-    const speakButton = event.target.closest("[data-speak]");
-    if (speakButton) speakText(speakButton.dataset.speak);
-    const meaningButton = event.target.closest("[data-toggle-meaning]");
-    if (meaningButton) document.querySelector(`[data-word-id="${meaningButton.dataset.toggleMeaning}"]`)?.classList.toggle("show-meaning");
-    const knownButton = event.target.closest("[data-known]");
-    if (knownButton) {
-      const id = knownButton.dataset.known;
-      state.knownWords[id] = !state.knownWords[id];
-      saveState();
-      renderVocabulary();
-    }
-    const quizOption = event.target.closest(".quiz-option");
-    if (quizOption && !quizOption.disabled) checkQuizAnswer(quizOption.dataset.answer);
-    const insertButton = event.target.closest("[data-insert]");
-    if (insertButton) {
-      const draft = document.getElementById("writingDraft");
-      draft.value = draft.value ? `${draft.value}\n\n${insertSnippets[insertButton.dataset.insert]}` : insertSnippets[insertButton.dataset.insert];
-      state.writingDraft = draft.value;
-      saveState();
-      draft.focus();
-    }
-  });
-  document.getElementById("wordSearch").addEventListener("input", renderVocabulary);
-  document.getElementById("randomWord").addEventListener("click", () => {
-    const item = filteredItems(vocabularyItems)[Math.floor(Math.random() * filteredItems(vocabularyItems).length)] || vocabularyItems[0];
-    document.getElementById("wordSearch").value = item.word;
-    renderVocabulary();
-  });
-  document.getElementById("toggleTemplateMask").addEventListener("click", () => {
-    state.maskedTemplates = !state.maskedTemplates;
-    saveState();
-    renderTemplates();
-  });
-  document.getElementById("revealReading").addEventListener("click", () => {
-    const answers = document.getElementById("readingAnswers");
-    answers.hidden = !answers.hidden;
-    document.getElementById("revealReading").textContent = answers.hidden ? "显示答案" : "隐藏答案";
-  });
-  document.getElementById("saveWriting").addEventListener("click", () => {
-    state.writingDraft = document.getElementById("writingDraft").value;
-    state.writingCorrection = document.getElementById("writingCorrection").value;
-    saveState();
-  });
-  document.getElementById("nextQuiz").addEventListener("click", () => {
-    currentQuizIndex += 1;
-    renderQuiz();
-  });
-  document.getElementById("resetDaily").addEventListener("click", () => {
-    state.daily = {};
-    saveState();
-    document.querySelectorAll("[data-daily]").forEach((input) => {
-      input.checked = false;
-    });
-  });
-  document.getElementById("clearData").addEventListener("click", () => {
-    localStorage.removeItem(stateKey);
-    Object.assign(state, structuredClone(defaultState));
-    hydrateFields();
-    renderVocabulary();
-    updateStats();
-  });
-  document.getElementById("startTimer").addEventListener("click", startTimer);
-}
-
-function startTimer() {
-  const button = document.getElementById("startTimer");
-  if (timerId) {
-    clearInterval(timerId);
-    timerId = null;
-    button.textContent = "开始";
-    return;
-  }
-  button.textContent = "暂停";
-  timerId = setInterval(() => {
-    timerSeconds -= 1;
-    if (timerSeconds <= 0) {
-      clearInterval(timerId);
-      timerId = null;
-      timerSeconds = 120;
-      button.textContent = "开始";
-    }
-    updateTimer();
-  }, 1000);
-}
-
-function updateTimer() {
-  const minutes = String(Math.floor(timerSeconds / 60)).padStart(2, "0");
-  const seconds = String(timerSeconds % 60).padStart(2, "0");
-  document.getElementById("timerText").textContent = `${minutes}:${seconds}`;
-}
-
-function escapeAttr(value) {
-  return String(value).replaceAll("&", "&amp;").replaceAll('"', "&quot;").replaceAll("<", "&lt;").replaceAll(">", "&gt;");
-}
-
-if ("speechSynthesis" in window) {
-  speechSynthesis.onvoiceschanged = updateVoiceStatus;
-}
-
-updateVoiceStatus();
-renderVocabulary();
-renderPatterns();
-renderTemplates();
-renderQuiz();
-hydrateFields();
-bindEvents();
-updateTimer();
-updateStats();
+document.getElementById("writingDraft").value = state.writingDraft;
+document.getElementById("writingCorrection").value = state.writingCorrection;
+document.getElementById("speakingNotes").value = state.speakingNotes;
+document.getElementById("toggleTemplateMask").textContent = state.maskedTemplates ? "Show translations" : "Hide translations";
+renderVocabulary(); renderPatterns(); renderTemplates(); renderQuiz(); updateStats(); updateVoiceStatus();
+if ("speechSynthesis" in window) speechSynthesis.addEventListener("voiceschanged", updateVoiceStatus);
