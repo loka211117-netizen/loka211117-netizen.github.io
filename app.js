@@ -1,5 +1,5 @@
 export const categoryTargets = { daily: 3000, academic: 3000, ielts: 6000, business: 2000, tcm: 2000, gaokao: 3500 };
-const categoryLimits = { daily: 140, academic: 120, gaokao: 100, ielts: 100, tcm: 80, business: 60 };
+const categoryLimits = { daily: 200, academic: 160, gaokao: 130, ielts: 130, tcm: 100, business: 80 };
 const categoryMeta = {
   daily: { label: "Daily 日常", short: "Daily · 日常" },
   academic: { label: "Academic 学术", short: "Academic · 学术" },
@@ -164,6 +164,66 @@ in public|公开地
 on purpose|故意地
 take care|保重；小心
 work out|解决；锻炼
+weather|天气
+temperature|温度
+traffic|交通状况
+rent|租金
+receipt|收据
+password|密码
+account|账户
+battery|电池
+charger|充电器
+screen|屏幕
+ticket|票
+platform|站台
+luggage|行李
+pharmacy|药房
+symptom|症状
+fever|发烧
+cough|咳嗽
+allergy|过敏
+emergency|紧急情况
+address|地址
+location|位置
+distance|距离
+entrance|入口
+exit|出口
+queue|队伍
+delay|延误
+refund|退款
+exchange|兑换；更换
+discount|折扣
+cash|现金
+change|零钱
+menu|菜单
+order|点单；订单
+ingredient|配料
+vegetarian|素食者
+workout|锻炼
+medicine|药物
+laundry|洗衣
+package|包裹
+document|文件
+form|表格
+signature|签名
+update|更新
+download|下载
+upload|上传
+connection|连接
+signal|信号
+device|设备
+reservation|预订
+passenger|乘客
+destination|目的地
+route|路线
+neighbourhood|街区
+supermarket|超市
+checkout|结账处
+membership|会员资格
+notification|通知
+privacy|隐私
+emergency contact|紧急联系人
+appointment|预约
 `.trim(),
   academic: `
 academic|学术的
@@ -289,6 +349,46 @@ nevertheless|尽管如此
 predominantly|主要地
 respectively|分别地
 thereby|从而
+assignment|作业
+attendance|出勤
+bibliography|参考书目
+campus|校园
+dissertation|学位论文
+essay|短文；论文
+examination|考试
+grade|成绩
+lecture|讲座；课程
+major|主修专业
+minor|辅修专业
+note-taking|记笔记
+plagiarism|抄袭
+professor|教授
+seminar|研讨课
+syllabus|课程大纲
+tutorial|辅导课
+citation|引用
+summary|摘要；总结
+thesis|论文
+peer review|同行评审
+critical thinking|批判性思维
+learning outcome|学习成果
+academic performance|学业表现
+reference list|参考文献表
+research question|研究问题
+sample size|样本量
+case study|案例研究
+fieldwork|实地研究
+survey|调查
+questionnaire|问卷
+findings|研究结果
+limitation|局限
+recommendation|建议
+appendix|附录
+table|表格
+figure|图表
+database|数据库
+journal|学术期刊
+coursework|课程作业
 `.trim(),
   gaokao: `
 adversity|逆境
@@ -393,6 +493,36 @@ take responsibility|承担责任
 broaden horizons|开阔视野
 achieve a goal|实现目标
 face a challenge|面对挑战
+acquire|获得；习得
+admire|钦佩
+announce|宣布
+apply|申请；应用
+argue|争论；论证
+attract|吸引
+celebrate|庆祝
+compare|比较
+compete|竞争
+concern|涉及；担忧
+consume|消耗；消费
+create|创造
+damage|损害
+develop|发展
+educate|教育
+examine|检查；考查
+exist|存在
+express|表达
+ignore|忽视
+organise|组织
+preserve|保护；保存
+reduce|减少
+respect|尊重
+respond|回应
+survive|生存
+vary|变化
+affect|影响
+provide|提供
+recognise|认出；承认
+observe|观察
 `.trim(),
   ielts: `
 accommodate|容纳；适应
@@ -495,6 +625,36 @@ social interaction|社会互动
 technological advancement|技术进步
 the wider community|更广泛的社会
 band score|雅思分数等级
+abandon|放弃
+alter|改变
+boost|促进；提高
+constrain|限制
+diminish|减少；削弱
+eliminate|消除
+generate|产生
+inhibit|抑制；阻碍
+offset|抵消
+reinforce|加强
+substitute|替代
+trend|趋势
+majority|大多数
+minority|少数
+resident|居民
+migration|迁移
+congestion|拥堵
+housing shortage|住房短缺
+natural resources|自然资源
+fossil fuels|化石燃料
+waste management|废物管理
+income gap|收入差距
+job security|工作保障
+remote work|远程工作
+media coverage|媒体报道
+policy maker|政策制定者
+public health|公共卫生
+population growth|人口增长
+living standards|生活水平
+traffic congestion|交通拥堵
 `.trim(),
   tcm: `
 acupuncture|针灸
@@ -577,6 +737,26 @@ rehabilitation|康复
 holistic|整体性的
 therapeutic|治疗性的
 practitioner|执业医师
+acupuncture needle|针灸针
+needling sensation|针感
+deqi sensation|得气感
+needle manipulation|行针手法
+tonifying method|补法
+reducing method|泻法
+acupuncture prescription|针灸处方
+auricular acupuncture|耳针
+scalp acupuncture|头针
+electroacupuncture|电针
+warm needling|温针灸
+trigger point|触发点
+range of motion|关节活动度
+muscle tension|肌肉紧张
+chronic pain|慢性疼痛
+acute pain|急性疼痛
+numbness|麻木
+swelling|肿胀
+tenderness|压痛
+follow-up consultation|复诊
 `.trim(),
   business: `
 agenda|议程
@@ -639,6 +819,26 @@ reach an agreement|达成协议
 meet a deadline|按时完成
 follow up|跟进
 keep me updated|随时告知进展
+benchmark|基准
+campaign|推广活动
+commission|佣金
+compliance|合规
+consultant|顾问
+consumer|消费者
+distribution|分销
+efficiency|效率
+expenditure|支出
+franchise|特许经营
+inventory|库存
+margin|利润率
+merger|合并
+portfolio|业务组合
+promotion|促销；晋升
+quotation|报价
+retail|零售
+wholesale|批发
+business trip|商务出差
+board meeting|董事会会议
 `.trim()
 };
 
@@ -851,13 +1051,9 @@ function renderDashboard() {
   document.getElementById("dailyQuote").textContent = quote[0];
   document.getElementById("dailyQuoteZh").textContent = quote[1];
   const study = todayStudy();
-  const remaining = Math.max(0, state.plan.dailyWords - study.words);
   document.getElementById("dailyGoalMetric").textContent = `${Math.min(study.words, state.plan.dailyWords)} / ${state.plan.dailyWords}`;
-  document.getElementById("dailyGoalCaption").textContent = remaining ? `${remaining} words left today` : "Daily goal completed";
   document.getElementById("streakMetric").textContent = `${state.streak} ${state.streak === 1 ? "day" : "days"}`;
-  document.getElementById("streakCaption").textContent = state.streak ? `Personal best: ${state.bestStreak} days` : "Start with one useful word";
   document.getElementById("timeMetric").textContent = `${study.minutes} min`;
-  document.getElementById("timeCaption").textContent = `Daily goal: ${state.plan.dailyMinutes} minutes`;
   const learnedThisWeek = weeklyLearned();
   document.getElementById("sidebarWeekly").textContent = `${learnedThisWeek} / ${state.plan.weeklyWords}`;
   document.getElementById("sidebarWeeklyBar").style.width = `${Math.min(100, learnedThisWeek / state.plan.weeklyWords * 100)}%`;
@@ -868,7 +1064,7 @@ function renderDashboard() {
 
 function progressCard(category, progress, statistics = false) {
   if (statistics) return `<article class="statistics-card"><div class="category-progress-head"><strong>${categoryMeta[category].short}</strong><b>${progress.percentage}%</b></div><div class="progress-track"><i style="width:${progress.percentage}%"></i></div><p>${progress.learned.toLocaleString()} of ${progress.target.toLocaleString()} words</p></article>`;
-  return `<button class="category-progress-card interactive-card" data-open-category="${category}" type="button"><div class="category-progress-head"><strong>${categoryMeta[category].short}</strong><b>${progress.percentage}%</b></div><div class="progress-track"><i style="width:${progress.percentage}%"></i></div><p>${progress.learned.toLocaleString()} of ${progress.target.toLocaleString()} words</p><span class="card-action">Open vocabulary 打开词汇 <i data-lucide="arrow-right"></i></span></button>`;
+  return `<button class="category-progress-card interactive-card" data-open-category="${category}" type="button" aria-label="Open ${categoryMeta[category].label} vocabulary"><div class="category-progress-head"><strong>${categoryMeta[category].short}</strong><b>${progress.percentage}%</b></div><div class="progress-track"><i style="width:${progress.percentage}%"></i></div><p>${progress.learned.toLocaleString()} of ${progress.target.toLocaleString()} words</p><span class="card-arrow" aria-hidden="true"><i data-lucide="arrow-right"></i></span></button>`;
 }
 
 function renderStatistics() {
@@ -880,6 +1076,7 @@ function renderStatistics() {
   document.getElementById("planDailyWords").value = state.plan.dailyWords;
   document.getElementById("planDailyMinutes").value = state.plan.dailyMinutes;
   document.getElementById("planWeeklyWords").value = state.plan.weeklyWords;
+  updatePlanPreview();
 }
 
 function createQuiz(item = null) {
@@ -950,6 +1147,32 @@ function savePlan() {
   saveState(); renderDashboard(); showToast("Learning plan saved · 学习计划已保存");
 }
 
+const planPresets = {
+  light: { dailyWords: 5, dailyMinutes: 10, weeklyWords: 25 },
+  standard: { dailyWords: 10, dailyMinutes: 15, weeklyWords: 50 },
+  intensive: { dailyWords: 20, dailyMinutes: 30, weeklyWords: 100 }
+};
+function updatePlanPreview() {
+  const words = Number(document.getElementById("planDailyWords").value);
+  const minutes = Number(document.getElementById("planDailyMinutes").value);
+  const weekly = Number(document.getElementById("planWeeklyWords").value);
+  document.getElementById("planDailyWordsValue").textContent = words;
+  document.getElementById("planDailyMinutesValue").textContent = minutes;
+  document.getElementById("planWeeklyWordsValue").textContent = weekly;
+  document.getElementById("planPreview").textContent = `${words} words · ${minutes} min daily · ${weekly} words weekly`;
+  document.querySelectorAll("[data-plan-preset]").forEach((button) => {
+    const preset = planPresets[button.dataset.planPreset];
+    button.classList.toggle("active", preset.dailyWords === words && preset.dailyMinutes === minutes && preset.weeklyWords === weekly);
+  });
+}
+function applyPlanPreset(name) {
+  const preset = planPresets[name];
+  document.getElementById("planDailyWords").value = preset.dailyWords;
+  document.getElementById("planDailyMinutes").value = preset.dailyMinutes;
+  document.getElementById("planWeeklyWords").value = preset.weeklyWords;
+  updatePlanPreview();
+}
+
 function refreshIcons() { if (window.lucide) window.lucide.createIcons(); }
 function setGreeting() {
   const hour = new Date().getHours();
@@ -965,6 +1188,7 @@ function bindEvents() {
   document.addEventListener("click", (event) => {
     const panelButton = event.target.closest("[data-panel]"); if (panelButton) setPanel(panelButton.dataset.panel);
     const categoryCard = event.target.closest("[data-open-category]"); if (categoryCard) { selectedCategory = categoryCard.dataset.openCategory; visibleWordCount = 24; document.getElementById("globalSearch").value = ""; renderFilters(); renderVocabulary(); setPanel("vocabulary"); }
+    const planPreset = event.target.closest("[data-plan-preset]"); if (planPreset) applyPlanPreset(planPreset.dataset.planPreset);
     const filter = event.target.closest("[data-category]"); if (filter) { selectedCategory = filter.dataset.category; visibleWordCount = 24; renderFilters(); renderVocabulary(); }
     const audio = event.target.closest("[data-word-audio]"); if (audio) { speakWord(audio.dataset.wordAudio); return; }
     const sentence = event.target.closest("[data-sentence]"); if (sentence) speakText(sentence.dataset.sentence);
@@ -982,6 +1206,7 @@ function bindEvents() {
   document.getElementById("randomWord").addEventListener("click", () => { const pool = searchVocabulary(vocabularyItems, "", selectedCategory); const item = pool[Math.floor(Math.random() * pool.length)]; search.value = item.word; renderVocabulary(); });
   document.getElementById("quizCategory").addEventListener("change", () => createQuiz());
   document.getElementById("savePlan").addEventListener("click", savePlan);
+  ["planDailyWords", "planDailyMinutes", "planWeeklyWords"].forEach((id) => document.getElementById(id).addEventListener("input", updatePlanPreview));
   document.getElementById("toggleTemplateMask").addEventListener("click", () => { state.maskedTemplates = !state.maskedTemplates; saveState(); renderTemplates(); });
   document.getElementById("revealReading").addEventListener("click", (event) => { const box = document.getElementById("readingAnswers"); box.hidden = !box.hidden; event.currentTarget.textContent = box.hidden ? "Show answers 显示答案" : "Hide answers 隐藏答案"; });
   document.getElementById("saveWriting").addEventListener("click", () => { state.writingDraft = document.getElementById("writingDraft").value; state.writingNotes = document.getElementById("writingNotes").value; saveState(); showToast("Draft saved · 草稿已保存"); });

@@ -44,7 +44,14 @@ for (const text of [
   "English and Chinese together, ready for fast recall.",
   "Mark mastered 掌握",
   "data-master-word",
-  'id="voiceStatus"'
+  'id="voiceStatus"',
+  "Start learning 开始学习",
+  "View record 查看记录",
+  "Choose practice 选择练习",
+  "Open vocabulary 打开词汇",
+  ">OVERVIEW<",
+  ">Workspace<",
+  ">Practice<"
 ]) {
   assert.ok(!appCopy.includes(text), `Unnecessary vocabulary copy or control remains: ${text}`);
 }
@@ -78,9 +85,7 @@ for (const token of [
   'class="metric-card metric-streak interactive-card" data-panel="statistics"',
   'class="metric-card metric-time interactive-card" data-panel="more"',
   "data-open-category",
-  "Start learning 开始学习",
-  "View record 查看记录",
-  "Choose practice 选择练习"
+  "card-arrow"
 ]) {
   assert.ok(appCopy.includes(token), `Missing homepage interaction: ${token}`);
 }
@@ -92,7 +97,7 @@ for (const token of [
   "--ink-plum",
   ".metric-card",
   ".category-progress-card",
-  ".card-action",
+  ".card-arrow",
   ".interactive-card:hover",
   ".mobile-nav",
   "@media (max-width: 720px)",
@@ -113,10 +118,10 @@ const {
   recordQuizResult
 } = app;
 
-assert.equal(vocabularyItems.length, 600, "Vocabulary library must contain exactly 600 items");
+assert.equal(vocabularyItems.length, 800, "Vocabulary library must contain exactly 800 items");
 assert.deepEqual(
   Object.fromEntries(Object.entries(Object.groupBy(vocabularyItems, (item) => item.category)).map(([key, items]) => [key, items.length])),
-  { daily: 140, academic: 120, gaokao: 100, ielts: 100, tcm: 80, business: 60 }
+  { daily: 200, academic: 160, gaokao: 130, ielts: 130, tcm: 100, business: 80 }
 );
 assert.deepEqual(categoryTargets, { daily: 3000, academic: 3000, ielts: 6000, business: 2000, tcm: 2000, gaokao: 3500 });
 
@@ -154,4 +159,17 @@ for (const token of [
 assert.ok(/function speakWord\([^)]*\)[\s\S]*?speakText\(word\)/.test(js), "Word audio must pass only the word to speech synthesis");
 assert.ok(!/quote[^\n]*data-speak/i.test(html), "Daily quote must not include an audio control");
 
-console.log("Individual English Platform acceptance checks passed: 600 words and core learning flows verified.");
+for (const token of [
+  'class="plan-presets"',
+  'type="range"',
+  'data-plan-preset="light"',
+  'data-plan-preset="standard"',
+  'data-plan-preset="intensive"',
+  'id="planPreview"',
+  "applyPlanPreset",
+  "updatePlanPreview"
+]) {
+  assert.ok(appCopy.includes(token), `Missing interactive learning plan behavior: ${token}`);
+}
+
+console.log("Individual English Platform acceptance checks passed: 800 words and core learning flows verified.");
