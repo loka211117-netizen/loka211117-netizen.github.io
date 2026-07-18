@@ -51,7 +51,6 @@
         <header class="topbar">
           <div class="greeting">
             <h1 id="greetingText">Good evening.</h1>
-            <p id="focusText">Continue with today's vocabulary.</p>
           </div>
           <label class="global-search-wrap" for="globalSearch">
             <i data-lucide="search"></i>
@@ -96,18 +95,18 @@
 
         <section class="panel" id="vocabulary-panel">
           <div class="section-title-row page-title-row">
-            <div><span class="section-kicker">600 CURATED WORDS</span><h2>Vocabulary · 词汇</h2><p>English and Chinese together, ready for fast recall.</p></div>
+            <div><h2>Vocabulary · 词汇</h2></div>
             <button class="primary-button" id="randomWord"><i data-lucide="shuffle"></i> Random 随机复习</button>
           </div>
           <div class="category-filters" id="categoryFilters" aria-label="Vocabulary categories"></div>
-          <div class="vocabulary-summary"><span id="vocabularyCount">600 words</span><span id="voiceStatus">British voice is ready</span></div>
+          <div class="vocabulary-summary"><span id="vocabularyCount">600 words</span></div>
           <div class="word-grid" id="wordGrid"></div>
           <button class="load-more" id="loadMoreWords">Load more 加载更多</button>
         </section>
 
         <section class="panel" id="quiz-panel">
           <div class="section-title-row page-title-row">
-            <div><span class="section-kicker">ACTIVE RECALL</span><h2>Quiz · 测试</h2><p>English → Chinese and Chinese → English.</p></div>
+            <div><h2>Quiz · 测试</h2></div>
             <select id="quizCategory" aria-label="Quiz category"></select>
           </div>
           <article class="quiz-card" id="quizCard"></article>
@@ -115,19 +114,19 @@
 
         <section class="panel" id="wrongbook-panel">
           <div class="section-title-row page-title-row">
-            <div><span class="section-kicker">FOCUSED REVIEW</span><h2>Wrong Book · 错题本</h2><p>Answer correctly three times in a row to complete review.</p></div>
+            <div><h2>Wrong Book · 错题本</h2></div>
           </div>
           <div id="wrongBookContent"></div>
         </section>
 
         <section class="panel" id="statistics-panel">
           <div class="section-title-row page-title-row">
-            <div><span class="section-kicker">YOUR RECORD</span><h2>Statistics · 学习统计</h2><p>See progress against every long-term target.</p></div>
+            <div><h2>Statistics · 学习统计</h2></div>
           </div>
           <div class="statistics-summary" id="statisticsSummary"></div>
           <div class="statistics-grid" id="statisticsGrid"></div>
           <article class="plan-card">
-            <div><span class="section-kicker">LEARNING PLAN</span><h3>Daily plan · 每日计划</h3></div>
+            <div><h3>Daily plan · 每日计划</h3></div>
             <div class="plan-fields">
               <label>Daily words 每日词汇<input id="planDailyWords" type="number" min="1" max="100" /></label>
               <label>Daily minutes 每日时间<input id="planDailyMinutes" type="number" min="5" max="240" /></label>
@@ -139,14 +138,14 @@
 
         <section class="panel" id="templates-panel">
           <div class="section-title-row page-title-row">
-            <div><span class="section-kicker">SHORT AND REUSABLE</span><h2>Template Library · 模板库</h2><p>Compact paragraphs for writing and speaking.</p></div>
+            <div><h2>Template Library · 模板库</h2></div>
             <button class="secondary-button" id="toggleTemplateMask"><i data-lucide="eye-off"></i> Hide Chinese 隐藏中文</button>
           </div>
           <div class="template-grid" id="templateGrid"></div>
         </section>
 
         <section class="panel" id="reading-panel">
-          <div class="section-title-row page-title-row"><div><span class="section-kicker">READ FOR MEANING</span><h2>Reading · 阅读</h2></div></div>
+          <div class="section-title-row page-title-row"><div><h2>Reading · 阅读</h2></div></div>
           <article class="practice-card reading-card">
             <span class="topic-pill">Academic Pressure</span>
             <h3>A healthier measure of progress</h3>
@@ -159,7 +158,7 @@
         </section>
 
         <section class="panel" id="writing-panel">
-          <div class="section-title-row page-title-row"><div><span class="section-kicker">DRAFT AND REFINE</span><h2>Writing · 写作</h2></div><button class="primary-button" id="saveWriting"><i data-lucide="save"></i> Save 保存</button></div>
+          <div class="section-title-row page-title-row"><div><h2>Writing · 写作</h2></div><button class="primary-button" id="saveWriting"><i data-lucide="save"></i> Save 保存</button></div>
           <div class="practice-grid">
             <article class="practice-card"><span class="topic-pill">TODAY'S QUESTION</span><h3>Academic pressure</h3><p>What causes academic pressure, and how can schools reduce it?</p><textarea id="writingDraft" placeholder="Write your response here..."></textarea></article>
             <article class="practice-card"><span class="topic-pill">USEFUL STARTERS</span><button class="insert-button" data-insert="pressure">Insert pressure template</button><button class="insert-button" data-insert="balanced">Insert balanced view</button><textarea id="writingNotes" placeholder="Corrections and useful phrases..."></textarea></article>
@@ -167,7 +166,7 @@
         </section>
 
         <section class="panel" id="speaking-panel">
-          <div class="section-title-row page-title-row"><div><span class="section-kicker">THINK AND SPEAK</span><h2>Speaking · 口语</h2></div><div class="timer"><strong id="timerText">02:00</strong><button class="primary-button" id="startTimer">Start 开始</button></div></div>
+          <div class="section-title-row page-title-row"><div><h2>Speaking · 口语</h2></div><div class="timer"><strong id="timerText">02:00</strong><button class="primary-button" id="startTimer">Start 开始</button></div></div>
           <div class="practice-grid">
             <article class="practice-card"><span class="topic-pill">CUE CARD</span><h3>Describe a time when you felt stressed about study.</h3><ol><li>When it happened</li><li>Why you felt stressed</li><li>What you did</li><li>What you learned</li></ol><button class="sound-button sentence-audio" data-sentence="I felt stressed because I had too many tests in the same week."><i data-lucide="volume-2"></i> Listen 发音</button></article>
             <article class="practice-card"><span class="topic-pill">REFLECTION</span><textarea id="speakingNotes" placeholder="One strong line and one point to improve..."></textarea></article>
@@ -175,7 +174,7 @@
         </section>
 
         <section class="panel" id="more-panel">
-          <div class="section-title-row page-title-row"><div><span class="section-kicker">MORE PRACTICE</span><h2>More · 更多</h2></div></div>
+          <div class="section-title-row page-title-row"><div><h2>More · 更多</h2></div></div>
           <div class="more-grid">
             <button data-panel="templates"><i data-lucide="library"></i><strong>Templates 模板库</strong></button>
             <button data-panel="reading"><i data-lucide="newspaper"></i><strong>Reading 阅读</strong></button>

@@ -39,6 +39,29 @@ for (const text of ["English Studio", "IELTS 7 Lab", "View statistics", "phoneti
   assert.ok(!html.includes(text), `Obsolete or unwanted copy remains: ${text}`);
 }
 
+for (const text of [
+  "Continue with today's vocabulary.",
+  "English and Chinese together, ready for fast recall.",
+  "Mark mastered 掌握",
+  "data-master-word",
+  'id="voiceStatus"'
+]) {
+  assert.ok(!appCopy.includes(text), `Unnecessary vocabulary copy or control remains: ${text}`);
+}
+
+for (const token of [
+  'class="word-card',
+  'data-word-card="',
+  'tabindex="0"',
+  'event.target.closest(".word-card")',
+  "if (audio) { speakWord(audio.dataset.wordAudio); return; }",
+  ".word-card:focus-visible",
+  "min-width: 44px",
+  "min-height: 44px"
+]) {
+  assert.ok(appCopy.includes(token) || css.includes(token), `Missing whole-card vocabulary interaction: ${token}`);
+}
+
 for (const token of [
   "rose-violet",
   "mobile-nav",

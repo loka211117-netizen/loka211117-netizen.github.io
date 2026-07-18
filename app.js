@@ -813,8 +813,6 @@ function speakText(text) {
 function speakWord(word) { speakText(word); }
 function updateVoiceStatus() {
   availableVoices = "speechSynthesis" in window ? speechSynthesis.getVoices() : [];
-  const voice = selectBritishVoice();
-  document.getElementById("voiceStatus").textContent = voice ? `${voice.name} · British audio` : "British English · Browser audio";
 }
 
 function setPanel(panel) {
@@ -839,9 +837,9 @@ function renderVocabulary() {
   document.getElementById("vocabularyCount").textContent = `${filtered.length} words · ${Object.keys(state.knownWords).filter((id) => state.knownWords[id]).length} mastered`;
   document.getElementById("wordGrid").innerHTML = visible.length ? visible.map((item) => {
     const mastered = Boolean(state.knownWords[item.id]);
-    return `<article class="word-card ${mastered ? "is-mastered" : ""}" data-word-id="${item.id}">
-      <div class="word-top"><div><h3>${escapeHtml(item.word)}</h3><p class="translation">${escapeHtml(item.zh)}</p></div><span class="word-category">${categoryMeta[item.category].short}</span></div>
-      <div class="word-actions"><button class="audio-button" data-word-audio="${escapeHtml(item.word)}" title="Listen 发音" aria-label="Listen to ${escapeHtml(item.word)}"><i data-lucide="volume-2"></i></button><button class="master-button ${mastered ? "is-mastered" : ""}" data-master-word="${item.id}">${mastered ? "Mastered 已掌握" : "Mark mastered 掌握"}</button></div>
+    return `<article class="word-card ${mastered ? "is-mastered" : ""}" data-word-card="${item.id}" data-word-id="${item.id}" tabindex="0" role="button" aria-pressed="${mastered}" aria-label="${escapeHtml(item.word)}，点击切换学习状态">
+      <div class="word-top"><div><h3>${escapeHtml(item.word)}</h3><p class="translation">${escapeHtml(item.zh)}</p></div></div>
+      <div class="word-actions"><button class="audio-button" data-word-audio="${escapeHtml(item.word)}" title="Listen 发音" aria-label="Listen to ${escapeHtml(item.word)}"><i data-lucide="volume-2"></i></button></div>
     </article>`;
   }).join("") : `<div class="empty-state">No matching words · 没有找到相关词汇</div>`;
   document.getElementById("loadMoreWords").hidden = visible.length >= filtered.length;
@@ -968,14 +966,15 @@ function bindEvents() {
     const panelButton = event.target.closest("[data-panel]"); if (panelButton) setPanel(panelButton.dataset.panel);
     const categoryCard = event.target.closest("[data-open-category]"); if (categoryCard) { selectedCategory = categoryCard.dataset.openCategory; visibleWordCount = 24; document.getElementById("globalSearch").value = ""; renderFilters(); renderVocabulary(); setPanel("vocabulary"); }
     const filter = event.target.closest("[data-category]"); if (filter) { selectedCategory = filter.dataset.category; visibleWordCount = 24; renderFilters(); renderVocabulary(); }
-    const audio = event.target.closest("[data-word-audio]"); if (audio) speakWord(audio.dataset.wordAudio);
+    const audio = event.target.closest("[data-word-audio]"); if (audio) { speakWord(audio.dataset.wordAudio); return; }
     const sentence = event.target.closest("[data-sentence]"); if (sentence) speakText(sentence.dataset.sentence);
-    const master = event.target.closest("[data-master-word]"); if (master) toggleMastered(master.dataset.masterWord);
+    const wordCard = event.target.closest(".word-card"); if (wordCard) toggleMastered(wordCard.dataset.wordCard);
     const quizOption = event.target.closest("[data-quiz-option]"); if (quizOption) answerQuiz(quizOption.dataset.quizOption, quizOption);
     const nextQuiz = event.target.closest("#nextQuiz"); if (nextQuiz) createQuiz();
     const review = event.target.closest("[data-review-word]"); if (review) { const item = vocabularyItems.find((candidate) => candidate.id === review.dataset.reviewWord); document.getElementById("quizCategory").value = item.category; createQuiz(item); setPanel("quiz"); }
     const insert = event.target.closest("[data-insert]"); if (insert) { const area = document.getElementById("writingDraft"); area.value += `${area.value ? "\n\n" : ""}${insertSnippets[insert.dataset.insert]}`; state.writingDraft = area.value; saveState(); }
   });
+  document.addEventListener("keydown", (event) => { const card = event.target.closest?.(".word-card"); if (card && (event.key === "Enter" || event.key === " ")) { event.preventDefault(); toggleMastered(card.dataset.wordCard); } });
   const search = document.getElementById("globalSearch");
   search.addEventListener("input", () => { visibleWordCount = 24; if (search.value.trim()) setPanel("vocabulary"); renderVocabulary(); });
   document.addEventListener("keydown", (event) => { if ((event.metaKey || event.ctrlKey) && event.key.toLowerCase() === "k") { event.preventDefault(); search.focus(); } });
