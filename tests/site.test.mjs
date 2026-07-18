@@ -14,13 +14,14 @@ const js = readFileSync(join(root, "app.js"), "utf8");
 
 const requiredHtml = [
   "Individual English Platform",
-  "大學英語",
-  "高考英語",
-  "中醫英語",
+  "Master usable English.",
+  "University English",
+  "Gaokao English",
+  "TCM English",
   "IELTS",
-  "模板庫",
+  "Hide translations",
   "British English",
-  "單詞測試",
+  "Word check",
   "Vocabulary",
   "Sentence Patterns",
   "Template Library",
@@ -37,6 +38,10 @@ for (const text of requiredHtml) {
 
 for (const text of ["IELTS 7 Lab", "assets/ielts-study-desk.png"]) {
   if (html.includes(text)) throw new Error(`Old IELTS-only artifact still present: ${text}`);
+}
+
+if (html.includes("一個給大學英語")) {
+  throw new Error("Homepage copy should not lead with a long Chinese explanation");
 }
 
 for (const token of [

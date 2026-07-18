@@ -16,15 +16,15 @@
         </a>
 
         <nav class="nav-list">
-          <button class="nav-item active" data-panel="dashboard"><span>01</span> Dashboard</button>
-          <button class="nav-item" data-panel="vocabulary"><span>02</span> Vocabulary</button>
-          <button class="nav-item" data-panel="patterns"><span>03</span> Sentence Patterns</button>
-          <button class="nav-item" data-panel="templates"><span>04</span> Template Library</button>
-          <button class="nav-item" data-panel="reading"><span>05</span> Reading</button>
-          <button class="nav-item" data-panel="writing"><span>06</span> Writing</button>
-          <button class="nav-item" data-panel="speaking"><span>07</span> Speaking</button>
-          <button class="nav-item" data-panel="tests"><span>08</span> Tests</button>
-          <button class="nav-item" data-panel="progress"><span>09</span> Progress</button>
+          <button class="nav-item active" data-panel="dashboard">Dashboard</button>
+          <button class="nav-item" data-panel="vocabulary">Vocabulary</button>
+          <button class="nav-item" data-panel="patterns">Sentence Patterns</button>
+          <button class="nav-item" data-panel="templates">Template Library</button>
+          <button class="nav-item" data-panel="reading">Reading</button>
+          <button class="nav-item" data-panel="writing">Writing</button>
+          <button class="nav-item" data-panel="speaking">Speaking</button>
+          <button class="nav-item" data-panel="tests">Tests</button>
+          <button class="nav-item" data-panel="progress">Progress</button>
         </nav>
 
         <div class="voice-card">
@@ -39,8 +39,8 @@
         <header class="topbar" id="dashboard">
           <div>
             <span class="eyebrow">PERSONAL STUDY SPACE</span>
-            <h1>Build English<br />that you can actually use.</h1>
-            <p>一個給大學英語、高考英語、中醫英語及 IELTS 的個人學習平台。英語優先，繁體中文只作必要解釋。</p>
+            <h1>Master usable English.</h1>
+            <p>Words, patterns and practice for academic, clinical and international communication.</p>
           </div>
           <div class="top-stats" aria-label="Study summary">
             <div><span>VOCABULARY</span><strong id="wordTotal">52</strong></div>
@@ -51,9 +51,9 @@
 
         <section class="filters" aria-label="Study categories">
           <button class="filter-chip active" data-filter="all">All</button>
-          <button class="filter-chip" data-filter="大學英語">大學英語</button>
-          <button class="filter-chip" data-filter="高考英語">高考英語</button>
-          <button class="filter-chip" data-filter="中醫英語">中醫英語</button>
+          <button class="filter-chip" data-filter="大學英語">University English</button>
+          <button class="filter-chip" data-filter="高考英語">Gaokao English</button>
+          <button class="filter-chip" data-filter="中醫英語">TCM English</button>
           <button class="filter-chip" data-filter="IELTS">IELTS</button>
         </section>
 
@@ -70,15 +70,15 @@
               <span class="eyebrow">WEEKLY TEMPLATE</span>
               <h3>Teenage Pressure</h3>
               <p>Hong Kong has an ossified education system that focuses too much on academic results. Schools and parents force students to perform well. As a result, teenagers have little time to sleep or play.</p>
-              <div class="translation">香港教育制度過度聚焦學業成績；這會壓縮青少年的睡眠與休息時間。</div>
+              <div class="translation">中文翻譯：香港教育制度過度聚焦學業成績，壓縮青少年的睡眠與休息時間。</div>
               <button class="sound-button wide" data-speak="Hong Kong has an ossified education system that focuses too much on academic results. Schools and parents force students to perform well. As a result, teenagers have little time to sleep or play.">Listen to template</button>
             </article>
             <article class="feature-card path-card">
               <span class="eyebrow">STUDY TRACKS</span>
               <ul>
-                <li><strong>大學英語</strong><span>Academic language, essays, GPA.</span></li>
-                <li><strong>高考英語</strong><span>Core grammar, reading, stable writing.</span></li>
-                <li><strong>中醫英語</strong><span>TCM terms, cases, patient communication.</span></li>
+                <li><strong>University English</strong><span>Academic language, essays and GPA.</span></li>
+                <li><strong>Gaokao English</strong><span>Core grammar, reading and stable writing.</span></li>
+                <li><strong>TCM English</strong><span>Terms, cases and patient communication.</span></li>
                 <li><strong>IELTS</strong><span>Applications, argument and speaking.</span></li>
               </ul>
             </article>
@@ -86,7 +86,7 @@
         </section>
 
         <section class="panel" id="vocabulary-panel">
-          <div class="section-heading"><div><span class="eyebrow">VOCABULARY</span><h2>Words with context.</h2><p>點擊 Meaning 查看繁體解釋；每個詞都可以朗讀。</p></div><div class="toolbar"><input id="wordSearch" placeholder="Search a word or meaning" /><button class="text-button" id="randomWord">Random review</button></div></div>
+          <div class="section-heading"><div><span class="eyebrow">VOCABULARY</span><h2>Words with context.</h2><p>Reveal the translation only when you need it.</p></div><div class="toolbar"><input id="wordSearch" placeholder="Search a word or meaning" /><button class="text-button" id="randomWord">Random review</button></div></div>
           <div class="word-grid" id="wordGrid"></div>
         </section>
 
@@ -96,7 +96,7 @@
         </section>
 
         <section class="panel" id="templates-panel">
-          <div class="section-heading"><div><span class="eyebrow">TEMPLATE LIBRARY</span><h2>One useful paragraph at a time.</h2><p>模板庫按主題收納，可用於 essay、speaking 或大學課堂。</p></div><button class="text-button" id="toggleTemplateMask">Hide translations</button></div>
+          <div class="section-heading"><div><span class="eyebrow">TEMPLATE LIBRARY</span><h2>One useful paragraph at a time.</h2><p>Focused paragraphs for essays, speaking and university classes.</p></div><button class="text-button" id="toggleTemplateMask">Hide translations</button></div>
           <div class="template-grid" id="templateGrid"></div>
         </section>
 
@@ -116,7 +116,7 @@
         </section>
 
         <section class="panel" id="tests-panel">
-          <div class="section-heading"><div><span class="eyebrow">TESTS</span><h2>單詞測試 · matching · gap fill</h2></div><button class="text-button" id="nextQuiz">Next question</button></div>
+          <div class="section-heading"><div><span class="eyebrow">TESTS</span><h2>Word check · matching · gap fill</h2></div><button class="text-button" id="nextQuiz">Next question</button></div>
           <article class="quiz-card" id="quizCard"></article>
         </section>
 
