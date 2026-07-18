@@ -118,11 +118,12 @@ const {
   recordQuizResult
 } = app;
 
-assert.equal(vocabularyItems.length, 800, "Vocabulary library must contain exactly 800 items");
+assert.equal(vocabularyItems.length, 1200, "Vocabulary library must contain exactly 1,200 items");
 assert.deepEqual(
   Object.fromEntries(Object.entries(Object.groupBy(vocabularyItems, (item) => item.category)).map(([key, items]) => [key, items.length])),
-  { daily: 200, academic: 160, gaokao: 130, ielts: 130, tcm: 100, business: 80 }
+  { daily: 220, academic: 220, gaokao: 240, ielts: 240, tcm: 150, business: 130 }
 );
+assert.equal(vocabularyItems.length * 2, 2400, "Quiz must provide 2,400 English-Chinese direction combinations");
 assert.deepEqual(categoryTargets, { daily: 3000, academic: 3000, ielts: 6000, business: 2000, tcm: 2000, gaokao: 3500 });
 
 assert.ok(searchVocabulary(vocabularyItems, "针灸").some((item) => item.word === "acupuncture"), "Chinese medical search must work");
@@ -172,4 +173,4 @@ for (const token of [
   assert.ok(appCopy.includes(token), `Missing interactive learning plan behavior: ${token}`);
 }
 
-console.log("Individual English Platform acceptance checks passed: 800 words and core learning flows verified.");
+console.log("Individual English Platform acceptance checks passed: 1,200 words and 2,400 quiz combinations verified.");

@@ -1,5 +1,5 @@
 export const categoryTargets = { daily: 3000, academic: 3000, ielts: 6000, business: 2000, tcm: 2000, gaokao: 3500 };
-const categoryLimits = { daily: 200, academic: 160, gaokao: 130, ielts: 130, tcm: 100, business: 80 };
+const categoryLimits = { daily: 220, academic: 220, gaokao: 240, ielts: 240, tcm: 150, business: 130 };
 const categoryMeta = {
   daily: { label: "Daily 日常", short: "Daily · 日常" },
   academic: { label: "Academic 学术", short: "Academic · 学术" },
@@ -67,6 +67,13 @@ support|支持
 trust|信任
 worry|担心
 appointment|预约
+commute|通勤
+wallet|钱包
+umbrella|雨伞
+elevator|电梯
+landlord|房东
+roommate|室友
+takeaway|外卖
 available|有空的；可用的
 balance|平衡
 behaviour|行为
@@ -223,7 +230,7 @@ membership|会员资格
 notification|通知
 privacy|隐私
 emergency contact|紧急联系人
-appointment|预约
+grocery shopping|购买日用品
 `.trim(),
   academic: `
 academic|学术的
@@ -389,6 +396,63 @@ figure|图表
 database|数据库
 journal|学术期刊
 coursework|课程作业
+annotate|加注释
+assessment|评估；考核
+author|作者
+chapter|章节
+conclusion|结论
+course|课程
+curriculum|课程体系
+data collection|数据收集
+definition|定义
+participant|参与者
+publication|出版物；发表
+reading list|阅读清单
+reliability|可靠性
+interpretation|解释；解读
+literature review|文献综述
+research design|研究设计
+primary source|一手资料
+secondary source|二手资料
+empirical evidence|实证证据
+theoretical framework|理论框架
+statistical analysis|统计分析
+data analysis|数据分析
+group project|小组项目
+oral presentation|口头汇报
+final examination|期末考试
+office hours|教师答疑时间
+academic advisor|学业导师
+degree programme|学位课程
+undergraduate|本科生
+postgraduate|研究生
+tuition fee|学费
+credit|学分
+elective|选修课
+compulsory course|必修课
+deadline|截止日期
+extension|延期
+feedback|反馈
+revision|修改；复习
+draft|草稿
+outline|提纲
+quotation|引用语
+academic integrity|学术诚信
+laboratory|实验室
+experiment|实验
+tutorial group|辅导小组
+marking criteria|评分标准
+learning strategy|学习策略
+research ethics|研究伦理
+control group|对照组
+independent variable|自变量
+dependent variable|因变量
+academic writing|学术写作
+conference paper|会议论文
+course material|课程资料
+graduation requirement|毕业要求
+student union|学生会
+exchange programme|交换项目
 `.trim(),
   gaokao: `
 adversity|逆境
@@ -523,6 +587,114 @@ affect|影响
 provide|提供
 recognise|认出；承认
 observe|观察
+ability|能力
+absence|缺席；缺乏
+accept|接受
+accident|事故；意外
+action|行动
+activity|活动
+advantage|优势
+advice|建议
+allow|允许
+ancient|古代的
+anxious|焦虑的
+appearance|外表；出现
+approach|方法；接近
+article|文章
+audience|观众；听众
+balance|平衡
+behave|表现；举止
+belief|信念
+benefit|益处
+brave|勇敢的
+breathe|呼吸
+career|职业
+cause|原因；导致
+chance|机会
+choice|选择
+community|社区
+condition|条件；状况
+connect|连接
+culture|文化
+curious|好奇的
+custom|习俗
+danger|危险
+decision|决定
+degree|程度；学位
+detail|细节
+direction|方向
+disease|疾病
+energy|精力；能源
+environment|环境
+experience|经历；经验
+famous|著名的
+favour|帮助；赞同
+freedom|自由
+friendship|友谊
+future|未来
+habit|习惯
+health|健康
+helpful|有帮助的
+honest|诚实的
+importance|重要性
+improve|改善
+include|包括
+information|信息
+interest|兴趣；利益
+knowledge|知识
+language|语言
+local|当地的
+manage|管理；设法做到
+manner|方式；礼貌
+memory|记忆
+method|方法
+mistake|错误
+nature|自然；本质
+necessary|必要的
+opportunity|机会
+ordinary|普通的
+patient|耐心的；病人
+peace|和平
+performance|表现；演出
+possible|可能的
+practice|练习；实践
+prepare|准备
+pressure|压力
+problem|问题
+progress|进步
+protect|保护
+purpose|目的
+quality|质量；品质
+reason|原因；理由
+relationship|关系
+result|结果
+safety|安全
+service|服务
+situation|情况
+skill|技能
+solution|解决办法
+special|特别的
+success|成功
+support|支持
+tradition|传统
+travel|旅行
+trust|信任
+valuable|有价值的
+waste|浪费；废物
+wealth|财富
+welcome|欢迎
+wonder|想知道；奇迹
+worry|担心
+youth|青年时期
+abroad|在国外
+active|积极的；活跃的
+calm|冷静的
+careful|仔细的
+familiar|熟悉的
+responsibility|责任
+society|社会
+technology|科技
+communication|交流
 `.trim(),
   ielts: `
 accommodate|容纳；适应
@@ -655,6 +827,116 @@ public health|公共卫生
 population growth|人口增长
 living standards|生活水平
 traffic congestion|交通拥堵
+anticipate|预期
+apparent|明显的
+attain|达到；获得
+attribute|归因于；属性
+capacity|能力；容量
+cease|停止
+coherent|连贯的
+coincide|同时发生；一致
+commodity|商品
+compensate|补偿
+compile|汇编；编制
+comprehensive|全面的
+comprise|由……组成
+concentrate|集中
+conduct|实施；行为
+consequence|后果
+considerable|相当大的
+contradict|反驳；矛盾
+crucial|关键的
+demonstrate|证明；展示
+derive|获得；源于
+detect|发现；检测
+deviate|偏离
+discriminate|区别；歧视
+diverse|多样的
+domestic|国内的；家庭的
+dominate|占主导
+encounter|遇到
+emphasis|重点；强调
+enhance|提升
+equivalent|相等的；等同物
+estimate|估计
+evident|明显的
+exceed|超过
+exploit|利用；剥削
+facilitate|促进
+factor|因素
+fundamental|根本的
+identify|识别
+illustrate|说明；举例
+imply|暗示
+impose|强加；实施
+incidence|发生率
+indicate|表明
+infrastructure investment|基础设施投资
+innovate|创新
+integrate|整合
+interpret|解释
+intervene|干预
+justify|证明合理
+maintain|维持；主张
+mechanism|机制
+modify|修改
+monitor|监测
+mutual|相互的
+neglect|忽视
+objective|目标；客观的
+obtain|获得
+overall|总体的
+perceive|察觉；认为
+persist|持续；坚持
+phenomenon|现象
+priority|优先事项
+prohibit|禁止
+proportion|比例
+pursue|追求
+radical|根本的；激进的
+recover|恢复
+regulate|监管；调节
+relevant|相关的
+reluctant|不情愿的
+require|需要
+resolve|解决；决心
+retain|保留
+reveal|揭示
+significant|显著的
+stable|稳定的
+strategy|策略
+sustain|维持
+transform|转变
+transmit|传递
+valid|有效的
+welfare|福利
+cultural diversity|文化多样性
+educational access|教育机会
+government funding|政府资助
+housing affordability|住房负担能力
+energy consumption|能源消耗
+food security|粮食安全
+water scarcity|水资源短缺
+urban planning|城市规划
+rural development|乡村发展
+income inequality|收入不平等
+public services|公共服务
+social welfare|社会福利
+technological change|技术变革
+employment opportunities|就业机会
+academic achievement|学业成就
+environmental protection|环境保护
+population density|人口密度
+life expectancy|预期寿命
+healthcare access|医疗服务可及性
+crime rate|犯罪率
+road safety|道路安全
+online learning|在线学习
+screen time|屏幕使用时间
+consumer spending|消费者支出
+tourism industry|旅游业
+cultural identity|文化认同
+international cooperation|国际合作
 `.trim(),
   tcm: `
 acupuncture|针灸
@@ -757,6 +1039,56 @@ numbness|麻木
 swelling|肿胀
 tenderness|压痛
 follow-up consultation|复诊
+collateral vessel|络脉
+extraordinary meridian|奇经八脉
+conception vessel|任脉
+governing vessel|督脉
+channel pathway|经脉循行
+yuan-source point|原穴
+luo-connecting point|络穴
+back-shu point|背俞穴
+front-mu point|募穴
+five-shu points|五输穴
+ear acupoint|耳穴
+ashi point|阿是穴
+needle insertion|进针
+needle retention|留针
+needle withdrawal|出针
+sterile needle|无菌针
+acupuncture depth|针刺深度
+acupuncture angle|针刺角度
+manual stimulation|手法刺激
+electrical stimulation|电刺激
+heat lamp therapy|红外线照射
+fire needling|火针
+plum blossom needle|梅花针
+bloodletting therapy|刺络放血
+moving cupping|走罐
+retained cupping|留罐
+herbal granules|中药颗粒
+patent medicine|中成药
+raw herbs|中药饮片
+herb compatibility|中药配伍
+dosage adjustment|剂量调整
+formula modification|方剂加减
+treatment course|疗程
+clinical response|临床反应
+tongue colour|舌色
+tongue shape|舌形
+pulse rate|脉率
+pulse strength|脉力
+floating pulse|浮脉
+deep pulse|沉脉
+thready pulse|细脉
+full pulse|实脉
+empty pulse|虚脉
+cold syndrome|寒证
+heat syndrome|热证
+exterior syndrome|表证
+interior syndrome|里证
+excess syndrome|实证
+deficiency syndrome|虚证
+follow-up assessment|复诊评估
 `.trim(),
   business: `
 agenda|议程
@@ -839,6 +1171,56 @@ retail|零售
 wholesale|批发
 business trip|商务出差
 board meeting|董事会会议
+acquisition|收购
+advertising|广告
+annual budget|年度预算
+balance sheet|资产负债表
+brand awareness|品牌认知度
+business strategy|商业策略
+capital|资本
+cash reserve|现金储备
+chief executive|首席执行官
+commercial|商业的
+company policy|公司政策
+consumer demand|消费者需求
+corporate culture|企业文化
+cost reduction|成本削减
+customer service|客户服务
+decision-making|决策
+delivery schedule|交付时间表
+digital marketing|数字营销
+discount rate|折扣率
+e-commerce|电子商务
+financial statement|财务报表
+gross profit|毛利润
+human resources|人力资源
+industry trend|行业趋势
+interest rate|利率
+key performance indicator|关键绩效指标
+labour cost|人工成本
+market analysis|市场分析
+market research|市场调研
+net profit|净利润
+operating margin|营业利润率
+payment terms|付款条件
+productivity growth|生产率增长
+project manager|项目经理
+purchase order|采购订单
+quarterly results|季度业绩
+refund policy|退款政策
+risk management|风险管理
+sales target|销售目标
+shareholder|股东
+startup|初创企业
+stock level|库存水平
+team meeting|团队会议
+trade agreement|贸易协议
+training programme|培训计划
+unit price|单价
+vendor|供应商
+warehouse|仓库
+working capital|营运资金
+workplace culture|职场文化
 `.trim()
 };
 
