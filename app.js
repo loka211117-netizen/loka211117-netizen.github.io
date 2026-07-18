@@ -869,7 +869,8 @@ function renderDashboard() {
 }
 
 function progressCard(category, progress, statistics = false) {
-  return `<article class="${statistics ? "statistics-card" : "category-progress-card"}"><div class="category-progress-head"><strong>${categoryMeta[category].short}</strong><b>${progress.percentage}%</b></div><div class="progress-track"><i style="width:${progress.percentage}%"></i></div><p>${progress.learned.toLocaleString()} of ${progress.target.toLocaleString()} words</p></article>`;
+  if (statistics) return `<article class="statistics-card"><div class="category-progress-head"><strong>${categoryMeta[category].short}</strong><b>${progress.percentage}%</b></div><div class="progress-track"><i style="width:${progress.percentage}%"></i></div><p>${progress.learned.toLocaleString()} of ${progress.target.toLocaleString()} words</p></article>`;
+  return `<button class="category-progress-card interactive-card" data-open-category="${category}" type="button"><div class="category-progress-head"><strong>${categoryMeta[category].short}</strong><b>${progress.percentage}%</b></div><div class="progress-track"><i style="width:${progress.percentage}%"></i></div><p>${progress.learned.toLocaleString()} of ${progress.target.toLocaleString()} words</p><span class="card-action">Open vocabulary 打开词汇 <i data-lucide="arrow-right"></i></span></button>`;
 }
 
 function renderStatistics() {
@@ -965,6 +966,7 @@ function startSpeakingTimer() {
 function bindEvents() {
   document.addEventListener("click", (event) => {
     const panelButton = event.target.closest("[data-panel]"); if (panelButton) setPanel(panelButton.dataset.panel);
+    const categoryCard = event.target.closest("[data-open-category]"); if (categoryCard) { selectedCategory = categoryCard.dataset.openCategory; visibleWordCount = 24; document.getElementById("globalSearch").value = ""; renderFilters(); renderVocabulary(); setPanel("vocabulary"); }
     const filter = event.target.closest("[data-category]"); if (filter) { selectedCategory = filter.dataset.category; visibleWordCount = 24; renderFilters(); renderVocabulary(); }
     const audio = event.target.closest("[data-word-audio]"); if (audio) speakWord(audio.dataset.wordAudio);
     const sentence = event.target.closest("[data-sentence]"); if (sentence) speakText(sentence.dataset.sentence);

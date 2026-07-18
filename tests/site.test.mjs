@@ -51,12 +51,26 @@ for (const token of [
 }
 
 for (const token of [
+  'class="metric-card metric-goal interactive-card" data-panel="vocabulary"',
+  'class="metric-card metric-streak interactive-card" data-panel="statistics"',
+  'class="metric-card metric-time interactive-card" data-panel="more"',
+  "data-open-category",
+  "Start learning 开始学习",
+  "View record 查看记录",
+  "Choose practice 选择练习"
+]) {
+  assert.ok(appCopy.includes(token), `Missing homepage interaction: ${token}`);
+}
+
+for (const token of [
   "color-scheme: light",
   "linear-gradient",
   "backdrop-filter",
   "--ink-plum",
   ".metric-card",
   ".category-progress-card",
+  ".card-action",
+  ".interactive-card:hover",
   ".mobile-nav",
   "@media (max-width: 720px)",
   "overflow-x: hidden",

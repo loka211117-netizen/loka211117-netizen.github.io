@@ -67,21 +67,24 @@
           </article>
 
           <div class="metrics-grid">
-            <article class="metric-card metric-goal">
+            <button class="metric-card metric-goal interactive-card" data-panel="vocabulary" type="button">
               <div class="metric-label"><i data-lucide="target"></i><span>DAILY GOAL · 每日目标</span></div>
               <strong id="dailyGoalMetric">0 / 10</strong>
               <p id="dailyGoalCaption">10 words left today</p>
-            </article>
-            <article class="metric-card metric-streak">
+              <span class="card-action">Start learning 开始学习 <i data-lucide="arrow-right"></i></span>
+            </button>
+            <button class="metric-card metric-streak interactive-card" data-panel="statistics" type="button">
               <div class="metric-label"><i data-lucide="flame"></i><span>CURRENT STREAK · 连续学习</span></div>
               <strong id="streakMetric">0 days</strong>
               <p id="streakCaption">Start with one useful word</p>
-            </article>
-            <article class="metric-card metric-time">
+              <span class="card-action">View record 查看记录 <i data-lucide="arrow-right"></i></span>
+            </button>
+            <button class="metric-card metric-time interactive-card" data-panel="more" type="button">
               <div class="metric-label"><i data-lucide="clock-3"></i><span>LEARNING TIME · 学习时间</span></div>
               <strong id="timeMetric">0 min</strong>
               <p id="timeCaption">Daily goal: 15 minutes</p>
-            </article>
+              <span class="card-action">Choose practice 选择练习 <i data-lucide="arrow-right"></i></span>
+            </button>
           </div>
 
           <div class="section-title-row">
