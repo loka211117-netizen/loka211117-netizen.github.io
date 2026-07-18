@@ -118,12 +118,17 @@ const {
   recordQuizResult
 } = app;
 
-assert.equal(vocabularyItems.length, 1200, "Vocabulary library must contain exactly 1,200 items");
+assert.equal(vocabularyItems.length, 1320, "Vocabulary library must contain exactly 1,320 items");
 assert.deepEqual(
   Object.fromEntries(Object.entries(Object.groupBy(vocabularyItems, (item) => item.category)).map(([key, items]) => [key, items.length])),
-  { daily: 220, academic: 220, gaokao: 240, ielts: 240, tcm: 150, business: 130 }
+  { daily: 220, academic: 220, gaokao: 240, ielts: 360, tcm: 150, business: 130 }
 );
-assert.equal(vocabularyItems.length * 2, 2400, "Quiz must provide 2,400 English-Chinese direction combinations");
+assert.equal(vocabularyItems.length * 2, 2640, "Quiz must provide 2,640 English-Chinese direction combinations");
+const ieltsWords = vocabularyItems.filter((item) => item.category === "ielts");
+assert.equal(ieltsWords[0].word, "academic", "IELTS foundation words must appear before advanced vocabulary");
+for (const word of ["academic", "satisfaction", "abandon"]) {
+  assert.ok(ieltsWords.some((item) => item.word === word), `Missing practical IELTS word: ${word}`);
+}
 assert.deepEqual(categoryTargets, { daily: 3000, academic: 3000, ielts: 6000, business: 2000, tcm: 2000, gaokao: 3500 });
 
 assert.ok(searchVocabulary(vocabularyItems, "针灸").some((item) => item.word === "acupuncture"), "Chinese medical search must work");
@@ -173,4 +178,4 @@ for (const token of [
   assert.ok(appCopy.includes(token), `Missing interactive learning plan behavior: ${token}`);
 }
 
-console.log("Individual English Platform acceptance checks passed: 1,200 words and 2,400 quiz combinations verified.");
+console.log("Individual English Platform acceptance checks passed: 1,320 words and 2,640 quiz combinations verified.");

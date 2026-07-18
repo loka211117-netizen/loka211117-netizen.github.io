@@ -1,5 +1,5 @@
 export const categoryTargets = { daily: 3000, academic: 3000, ielts: 6000, business: 2000, tcm: 2000, gaokao: 3500 };
-const categoryLimits = { daily: 220, academic: 220, gaokao: 240, ielts: 240, tcm: 150, business: 130 };
+const categoryLimits = { daily: 220, academic: 220, gaokao: 240, ielts: 360, tcm: 150, business: 130 };
 const categoryMeta = {
   daily: { label: "Daily 日常", short: "Daily · 日常" },
   academic: { label: "Academic 学术", short: "Academic · 学术" },
@@ -697,6 +697,126 @@ technology|科技
 communication|交流
 `.trim(),
   ielts: `
+academic|学术的
+access|使用机会；进入
+accommodation|住宿
+achieve|实现；达到
+advantage|优势
+advertise|做广告
+affect|影响
+amount|数量
+annual|每年的
+apply|申请；应用
+area|地区；领域
+avoid|避免
+benefit|益处；受益
+cause|原因；导致
+change|改变；变化
+choice|选择
+communication|交流
+community|社区
+compare|比较
+complete|完成；完整的
+concern|关注；担忧
+condition|条件；状况
+consider|考虑
+cost|费用
+create|创造
+culture|文化
+decrease|减少
+develop|发展
+difference|差异
+difficult|困难的
+education|教育
+effect|影响；效果
+employment|就业
+environment|环境
+essential|必要的
+experience|经历；经验
+explain|解释
+facility|设施
+family|家庭
+government|政府
+health|健康
+improve|改善
+increase|增加
+individual|个人
+information|信息
+interest|兴趣；利益
+issue|问题；议题
+knowledge|知识
+language|语言
+lifestyle|生活方式
+local|当地的
+major|主要的
+measure|措施；衡量
+method|方法
+modern|现代的
+natural|自然的
+opportunity|机会
+participate|参与
+percentage|百分比
+pollution|污染
+population|人口
+possible|可能的
+practise|练习
+prefer|更喜欢
+pressure|压力
+prevent|防止
+problem|问题
+produce|生产；产生
+protect|保护
+provide|提供
+public|公众的
+reason|原因
+reduce|减少
+research|研究
+resource|资源
+responsibility|责任
+result|结果
+risk|风险
+rural|乡村的
+satisfaction|满意度
+service|服务
+society|社会
+solution|解决办法
+standard|标准
+student|学生
+support|支持
+technology|科技
+tradition|传统
+transport|交通
+travel|旅行
+unemployment|失业
+university|大学
+urban|城市的
+value|价值
+work|工作
+young people|年轻人
+living cost|生活成本
+job opportunity|就业机会
+social media|社交媒体
+healthy diet|健康饮食
+physical activity|体育活动
+online education|在线教育
+environmental problem|环境问题
+public space|公共空间
+school subject|学校科目
+study abroad|出国留学
+part-time job|兼职工作
+full-time job|全职工作
+household income|家庭收入
+living environment|居住环境
+public opinion|公众意见
+work experience|工作经验
+daily routine|日常作息
+free time|空闲时间
+city centre|市中心
+local residents|当地居民
+young generation|年轻一代
+higher education|高等教育
+career choice|职业选择
+customer satisfaction|客户满意度
 accommodate|容纳；适应
 accumulate|积累
 adequate|足够的
