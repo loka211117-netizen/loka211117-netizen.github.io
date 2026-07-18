@@ -1,126 +1,199 @@
 <!doctype html>
-<html lang="zh-Hant">
+<html lang="zh-Hans">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="theme-color" content="#17112f" />
+    <meta name="theme-color" content="#f3e9f0" />
+    <meta name="description" content="A bilingual personal English learning platform for daily, academic, IELTS, business, TCM and Gaokao English." />
+    <meta name="keywords" content="English learning, IELTS, academic English, TCM English, 高考英语, 中医英语" />
+    <meta property="og:title" content="Individual English Platform" />
+    <meta property="og:description" content="Learn useful English vocabulary, templates and skills with bilingual support." />
+    <meta property="og:type" content="website" />
     <title>Individual English Platform</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&amp;family=DM+Serif+Display&amp;display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="styles.css" />
   </head>
-  <body>
+  <body class="rose-violet">
     <div class="app-shell">
-      <aside class="rail" aria-label="Main navigation">
-        <a class="brand" href="#dashboard" data-panel-link="dashboard">
-          <span class="brand-mark">i</span>
-          <span><strong>Individual</strong><em>English Platform</em></span>
-        </a>
+      <aside class="sidebar" aria-label="Main navigation">
+        <button class="brand" data-panel="dashboard" aria-label="Open home">
+          <span class="brand-mark">L</span>
+          <span class="brand-name">Learn</span>
+        </button>
 
-        <nav class="nav-list">
-          <button class="nav-item active" data-panel="vocabulary">Vocabulary</button>
-          <button class="nav-item" data-panel="patterns">Sentence Patterns</button>
-          <button class="nav-item" data-panel="templates">Template Library</button>
-          <button class="nav-item" data-panel="reading">Reading</button>
-          <button class="nav-item" data-panel="writing">Writing</button>
-          <button class="nav-item" data-panel="speaking">Speaking</button>
-          <button class="nav-item" data-panel="tests">Tests</button>
-          <button class="nav-item" data-panel="progress">Progress</button>
+        <p class="nav-label">Workspace</p>
+        <nav class="desktop-nav">
+          <button class="nav-item active" data-panel="dashboard"><i data-lucide="house"></i><span>Home 首页</span></button>
+          <button class="nav-item" data-panel="vocabulary"><i data-lucide="book-open"></i><span>Vocabulary 词汇</span></button>
+          <button class="nav-item" data-panel="quiz"><i data-lucide="circle-help"></i><span>Quiz 测试</span></button>
+          <button class="nav-item" data-panel="wrongbook"><i data-lucide="notebook-tabs"></i><span>Wrong Book 错题本</span><b id="wrongBadge">0</b></button>
+          <button class="nav-item" data-panel="statistics"><i data-lucide="chart-no-axes-combined"></i><span>Statistics 统计</span></button>
         </nav>
 
-        <div class="voice-card">
-          <span class="eyebrow">VOICE ENGINE</span>
-          <strong>British English</strong>
-          <small id="voiceStatus">Checking available voice...</small>
-          <button class="sound-button listen-all" data-speak="Good English is built by useful words and repeatable sentences." aria-label="Play a British English sample">Play sample</button>
-        </div>
+        <p class="nav-label">Practice</p>
+        <nav class="desktop-nav">
+          <button class="nav-item" data-panel="templates"><i data-lucide="library"></i><span>Templates 模板库</span></button>
+          <button class="nav-item" data-panel="reading"><i data-lucide="newspaper"></i><span>Reading 阅读</span></button>
+          <button class="nav-item" data-panel="writing"><i data-lucide="pen-line"></i><span>Writing 写作</span></button>
+          <button class="nav-item" data-panel="speaking"><i data-lucide="mic-2"></i><span>Speaking 口语</span></button>
+        </nav>
+
+        <article class="weekly-mini">
+          <span>Weekly target 本周目标</span>
+          <strong id="sidebarWeekly">0 / 50</strong>
+          <div class="progress-track"><i id="sidebarWeeklyBar"></i></div>
+        </article>
       </aside>
 
       <main class="workspace">
-        <header class="topbar" aria-label="Study controls">
-          <div class="study-name"><span class="brand-mark">i</span><strong>English Study</strong></div>
-          <div class="top-stats" aria-label="Study progress">
-            <div><span>WORDS</span><strong id="wordTotal">52</strong></div>
-            <div><span>TEMPLATES</span><strong id="templateTotal">12</strong></div>
-            <div><span>KNOWN</span><strong id="knownTotal">0</strong></div>
+        <header class="topbar">
+          <div class="greeting">
+            <h1 id="greetingText">Good evening.</h1>
+            <p id="focusText">Continue with today's vocabulary.</p>
           </div>
+          <label class="global-search-wrap" for="globalSearch">
+            <i data-lucide="search"></i>
+            <input id="globalSearch" type="search" autocomplete="off" placeholder="Search English or Chinese  搜索词汇" />
+            <kbd>⌘ K</kbd>
+          </label>
         </header>
 
-        <section class="filters" aria-label="Study categories">
-          <button class="filter-chip active" data-filter="all">All</button>
-          <button class="filter-chip" data-filter="大學英語">University English</button>
-          <button class="filter-chip" data-filter="高考英語">Gaokao English</button>
-          <button class="filter-chip" data-filter="中醫英語">TCM English</button>
-          <button class="filter-chip" data-filter="IELTS">IELTS</button>
-        </section>
+        <section class="panel active" id="dashboard-panel">
+          <article class="quote-card" aria-label="Daily quote">
+            <blockquote id="dailyQuote">This is not the end, but a new beginning.</blockquote>
+            <p id="dailyQuoteZh">这不是结束，而是新的开始。</p>
+          </article>
 
-        <section class="panel" id="archive-panel" hidden>
-          <div class="section-heading"><div><span class="eyebrow">TODAY'S FOCUS</span><h2>Four small wins.</h2></div><button class="text-button" id="resetDaily">Reset day</button></div>
-          <div class="daily-grid">
-            <label class="daily-card"><input type="checkbox" data-daily="words" /><span class="daily-number">01</span><strong>10 words</strong><small>Listen, recall, then use one in a sentence.</small></label>
-            <label class="daily-card"><input type="checkbox" data-daily="read" /><span class="daily-number">02</span><strong>One short reading</strong><small>Find a main idea and one phrase worth keeping.</small></label>
-            <label class="daily-card"><input type="checkbox" data-daily="template" /><span class="daily-number">03</span><strong>One template</strong><small>Read it aloud three times without rushing.</small></label>
-            <label class="daily-card"><input type="checkbox" data-daily="write" /><span class="daily-number">04</span><strong>Five lines</strong><small>Change one template into your own idea.</small></label>
-          </div>
-          <div class="feature-grid">
-            <article class="feature-card purple-feature">
-              <span class="eyebrow">WEEKLY TEMPLATE</span>
-              <h3>Teenage Pressure</h3>
-              <p>Hong Kong has an ossified education system that focuses too much on academic results. Schools and parents force students to perform well. As a result, teenagers have little time to sleep or play.</p>
-              <div class="translation">中文翻譯：香港教育制度過度聚焦學業成績，壓縮青少年的睡眠與休息時間。</div>
-              <button class="sound-button wide" data-speak="Hong Kong has an ossified education system that focuses too much on academic results. Schools and parents force students to perform well. As a result, teenagers have little time to sleep or play.">Listen to template</button>
+          <div class="metrics-grid">
+            <article class="metric-card metric-goal">
+              <div class="metric-label"><i data-lucide="target"></i><span>DAILY GOAL · 每日目标</span></div>
+              <strong id="dailyGoalMetric">0 / 10</strong>
+              <p id="dailyGoalCaption">10 words left today</p>
             </article>
-            <article class="feature-card path-card">
-              <span class="eyebrow">STUDY TRACKS</span>
-              <ul>
-                <li><strong>University English</strong><span>Academic language, essays and GPA.</span></li>
-                <li><strong>Gaokao English</strong><span>Core grammar, reading and stable writing.</span></li>
-                <li><strong>TCM English</strong><span>Terms, cases and patient communication.</span></li>
-                <li><strong>IELTS</strong><span>Applications, argument and speaking.</span></li>
-              </ul>
+            <article class="metric-card metric-streak">
+              <div class="metric-label"><i data-lucide="flame"></i><span>CURRENT STREAK · 连续学习</span></div>
+              <strong id="streakMetric">0 days</strong>
+              <p id="streakCaption">Start with one useful word</p>
+            </article>
+            <article class="metric-card metric-time">
+              <div class="metric-label"><i data-lucide="clock-3"></i><span>LEARNING TIME · 学习时间</span></div>
+              <strong id="timeMetric">0 min</strong>
+              <p id="timeCaption">Daily goal: 15 minutes</p>
             </article>
           </div>
+
+          <div class="section-title-row">
+            <div><span class="section-kicker">OVERVIEW</span><h2>Learning Progress · 学习进度</h2></div>
+            <button class="soft-link" data-panel="statistics">Statistics 统计 <i data-lucide="arrow-right"></i></button>
+          </div>
+          <div class="category-progress-grid" id="dashboardProgress"></div>
         </section>
 
-        <section class="panel active" id="vocabulary-panel">
-          <div class="section-heading"><div><span class="eyebrow">VOCABULARY</span><h2>Words with context.</h2><p>Reveal the translation only when you need it.</p></div><div class="toolbar"><input id="wordSearch" placeholder="Search a word or meaning" /><button class="text-button" id="randomWord">Random review</button></div></div>
+        <section class="panel" id="vocabulary-panel">
+          <div class="section-title-row page-title-row">
+            <div><span class="section-kicker">600 CURATED WORDS</span><h2>Vocabulary · 词汇</h2><p>English and Chinese together, ready for fast recall.</p></div>
+            <button class="primary-button" id="randomWord"><i data-lucide="shuffle"></i> Random 随机复习</button>
+          </div>
+          <div class="category-filters" id="categoryFilters" aria-label="Vocabulary categories"></div>
+          <div class="vocabulary-summary"><span id="vocabularyCount">600 words</span><span id="voiceStatus">British voice is ready</span></div>
           <div class="word-grid" id="wordGrid"></div>
+          <button class="load-more" id="loadMoreWords">Load more 加载更多</button>
         </section>
 
-        <section class="panel" id="patterns-panel">
-          <div class="section-heading"><div><span class="eyebrow">SENTENCE PATTERNS</span><h2>Short. Clear. Reusable.</h2></div></div>
-          <div class="pattern-grid" id="patternGrid"></div>
+        <section class="panel" id="quiz-panel">
+          <div class="section-title-row page-title-row">
+            <div><span class="section-kicker">ACTIVE RECALL</span><h2>Quiz · 测试</h2><p>English → Chinese and Chinese → English.</p></div>
+            <select id="quizCategory" aria-label="Quiz category"></select>
+          </div>
+          <article class="quiz-card" id="quizCard"></article>
+        </section>
+
+        <section class="panel" id="wrongbook-panel">
+          <div class="section-title-row page-title-row">
+            <div><span class="section-kicker">FOCUSED REVIEW</span><h2>Wrong Book · 错题本</h2><p>Answer correctly three times in a row to complete review.</p></div>
+          </div>
+          <div id="wrongBookContent"></div>
+        </section>
+
+        <section class="panel" id="statistics-panel">
+          <div class="section-title-row page-title-row">
+            <div><span class="section-kicker">YOUR RECORD</span><h2>Statistics · 学习统计</h2><p>See progress against every long-term target.</p></div>
+          </div>
+          <div class="statistics-summary" id="statisticsSummary"></div>
+          <div class="statistics-grid" id="statisticsGrid"></div>
+          <article class="plan-card">
+            <div><span class="section-kicker">LEARNING PLAN</span><h3>Daily plan · 每日计划</h3></div>
+            <div class="plan-fields">
+              <label>Daily words 每日词汇<input id="planDailyWords" type="number" min="1" max="100" /></label>
+              <label>Daily minutes 每日时间<input id="planDailyMinutes" type="number" min="5" max="240" /></label>
+              <label>Weekly words 每周目标<input id="planWeeklyWords" type="number" min="5" max="700" /></label>
+            </div>
+            <button class="primary-button" id="savePlan">Save plan 保存计划</button>
+          </article>
         </section>
 
         <section class="panel" id="templates-panel">
-          <div class="section-heading"><div><span class="eyebrow">TEMPLATE LIBRARY</span><h2>One useful paragraph at a time.</h2><p>Focused paragraphs for essays, speaking and university classes.</p></div><button class="text-button" id="toggleTemplateMask">Hide translations</button></div>
+          <div class="section-title-row page-title-row">
+            <div><span class="section-kicker">SHORT AND REUSABLE</span><h2>Template Library · 模板库</h2><p>Compact paragraphs for writing and speaking.</p></div>
+            <button class="secondary-button" id="toggleTemplateMask"><i data-lucide="eye-off"></i> Hide Chinese 隐藏中文</button>
+          </div>
           <div class="template-grid" id="templateGrid"></div>
         </section>
 
         <section class="panel" id="reading-panel">
-          <div class="section-heading"><div><span class="eyebrow">READING</span><h2>Read for meaning.</h2></div><button class="text-button" id="revealReading">Show answers</button></div>
-          <article class="practice-card"><span class="topic-tag">Academic Pressure</span><p class="reading-copy">In many education systems, students are judged mainly by grades. This makes schools efficient, but it can also make teenagers anxious. When a young person spends most of the week preparing for tests, sleep and hobbies are often treated as unimportant. A healthier system should still value effort, but it should also protect time for rest, exercise and social life.</p><p class="translation">不少教育體系主要以成績評價學生，效率高卻可能令青少年焦慮。健康的制度也應保護休息、運動與社交時間。</p><ol class="question-list"><li>What problem can grade-focused education create?</li><li>Which phrase means “not important”?</li><li>What should a healthier system protect?</li></ol><div class="answer-box" id="readingAnswers" hidden><p>Anxiety. / Treated as unimportant. / Time for rest, exercise and social life.</p></div></article>
+          <div class="section-title-row page-title-row"><div><span class="section-kicker">READ FOR MEANING</span><h2>Reading · 阅读</h2></div></div>
+          <article class="practice-card reading-card">
+            <span class="topic-pill">Academic Pressure</span>
+            <h3>A healthier measure of progress</h3>
+            <p class="reading-copy">In many education systems, students are judged mainly by grades. This may make assessment efficient, but it can also make teenagers anxious. When young people spend most of the week preparing for tests, sleep and hobbies are often treated as unimportant. A healthier system should value effort while protecting time for rest, exercise and social life.</p>
+            <p class="translation-copy">许多教育体系主要以成绩评价学生。这样做或许便于评估，却也可能令青少年焦虑。更健康的制度应重视努力，同时保障休息、运动与社交时间。</p>
+            <ol><li>What problem can grade-focused education create?</li><li>What should a healthier system protect?</li></ol>
+            <button class="secondary-button" id="revealReading">Show answers 显示答案</button>
+            <div class="answer-box" id="readingAnswers" hidden>Anxiety. / Time for rest, exercise and social life.</div>
+          </article>
         </section>
 
         <section class="panel" id="writing-panel">
-          <div class="section-heading"><div><span class="eyebrow">WRITING</span><h2>Draft before you polish.</h2></div><button class="primary-button" id="saveWriting">Save draft</button></div>
-          <div class="practice-grid"><article class="practice-card"><span class="topic-tag">TODAY'S QUESTION</span><h3>Academic pressure</h3><p>Many students feel stressed because schools focus too much on exam results. What are the causes and what solutions can you suggest?</p><textarea id="writingDraft" placeholder="Write 120–180 words. Keep the first draft simple."></textarea></article><article class="practice-card"><span class="topic-tag">USEFUL STARTERS</span><button class="insert-button" data-insert="pressure">Insert pressure template</button><button class="insert-button" data-insert="balanced">Insert balanced view</button><textarea id="writingCorrection" placeholder="Note mistakes here: students has → students have"></textarea></article></div>
+          <div class="section-title-row page-title-row"><div><span class="section-kicker">DRAFT AND REFINE</span><h2>Writing · 写作</h2></div><button class="primary-button" id="saveWriting"><i data-lucide="save"></i> Save 保存</button></div>
+          <div class="practice-grid">
+            <article class="practice-card"><span class="topic-pill">TODAY'S QUESTION</span><h3>Academic pressure</h3><p>What causes academic pressure, and how can schools reduce it?</p><textarea id="writingDraft" placeholder="Write your response here..."></textarea></article>
+            <article class="practice-card"><span class="topic-pill">USEFUL STARTERS</span><button class="insert-button" data-insert="pressure">Insert pressure template</button><button class="insert-button" data-insert="balanced">Insert balanced view</button><textarea id="writingNotes" placeholder="Corrections and useful phrases..."></textarea></article>
+          </div>
         </section>
 
         <section class="panel" id="speaking-panel">
-          <div class="section-heading"><div><span class="eyebrow">SPEAKING</span><h2>Think, speak, review.</h2></div><div class="timer"><strong id="timerText">02:00</strong><button class="primary-button" id="startTimer">Start</button></div></div>
-          <div class="practice-grid"><article class="practice-card"><span class="topic-tag">CUE CARD</span><h3>Describe a time when you felt stressed about study.</h3><ol class="question-list"><li>When it happened</li><li>Why you felt stressed</li><li>What you did</li><li>What you learned</li></ol><button class="sound-button wide" data-speak="I felt stressed because I had too many tests in the same week. I made a simple plan and finished the most urgent tasks first.">Listen to sample</button></article><article class="practice-card"><span class="topic-tag">REFLECTION</span><textarea id="speakingNotes" placeholder="After speaking: one strong line + one line to improve."></textarea></article></div>
+          <div class="section-title-row page-title-row"><div><span class="section-kicker">THINK AND SPEAK</span><h2>Speaking · 口语</h2></div><div class="timer"><strong id="timerText">02:00</strong><button class="primary-button" id="startTimer">Start 开始</button></div></div>
+          <div class="practice-grid">
+            <article class="practice-card"><span class="topic-pill">CUE CARD</span><h3>Describe a time when you felt stressed about study.</h3><ol><li>When it happened</li><li>Why you felt stressed</li><li>What you did</li><li>What you learned</li></ol><button class="sound-button sentence-audio" data-sentence="I felt stressed because I had too many tests in the same week."><i data-lucide="volume-2"></i> Listen 发音</button></article>
+            <article class="practice-card"><span class="topic-pill">REFLECTION</span><textarea id="speakingNotes" placeholder="One strong line and one point to improve..."></textarea></article>
+          </div>
         </section>
 
-        <section class="panel" id="tests-panel">
-          <div class="section-heading"><div><span class="eyebrow">TESTS</span><h2>Word check · matching · gap fill</h2></div><button class="text-button" id="nextQuiz">Next question</button></div>
-          <article class="quiz-card" id="quizCard"></article>
-        </section>
-
-        <section class="panel" id="progress-panel">
-          <div class="section-heading"><div><span class="eyebrow">PROGRESS</span><h2>Keep a visible record.</h2></div><button class="text-button danger" id="clearData">Clear local data</button></div>
-          <div class="progress-grid"><article class="progress-card"><span>KNOWN WORDS</span><strong id="knownProgress">0 / 52</strong><div class="meter"><i id="knownMeter"></i></div></article><article class="progress-card"><span>QUIZ SCORE</span><strong id="quizScore">0 correct / 0 attempts</strong></article><article class="progress-card wide-progress"><span>LATEST WRITING DRAFT</span><p id="draftPreview">No saved draft yet.</p></article></div>
+        <section class="panel" id="more-panel">
+          <div class="section-title-row page-title-row"><div><span class="section-kicker">MORE PRACTICE</span><h2>More · 更多</h2></div></div>
+          <div class="more-grid">
+            <button data-panel="templates"><i data-lucide="library"></i><strong>Templates 模板库</strong></button>
+            <button data-panel="reading"><i data-lucide="newspaper"></i><strong>Reading 阅读</strong></button>
+            <button data-panel="writing"><i data-lucide="pen-line"></i><strong>Writing 写作</strong></button>
+            <button data-panel="speaking"><i data-lucide="mic-2"></i><strong>Speaking 口语</strong></button>
+            <button data-panel="statistics"><i data-lucide="settings-2"></i><strong>Learning Plan 学习计划</strong></button>
+          </div>
         </section>
       </main>
     </div>
-    <script src="app.js"></script>
+
+    <nav class="mobile-nav" aria-label="Mobile navigation">
+      <button class="active" data-panel="dashboard"><i data-lucide="house"></i><span>Home</span></button>
+      <button data-panel="vocabulary"><i data-lucide="book-open"></i><span>Vocabulary</span></button>
+      <button data-panel="quiz"><i data-lucide="circle-help"></i><span>Quiz</span></button>
+      <button data-panel="wrongbook"><i data-lucide="notebook-tabs"></i><span>Wrong Book</span></button>
+      <button data-panel="more"><i data-lucide="ellipsis"></i><span>More</span></button>
+    </nav>
+
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+    <script src="https://unpkg.com/lucide@0.468.0/dist/umd/lucide.min.js"></script>
+    <script type="module" src="app.js"></script>
   </body>
 </html>
