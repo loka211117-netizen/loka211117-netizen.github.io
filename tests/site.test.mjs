@@ -14,7 +14,6 @@ const js = readFileSync(join(root, "app.js"), "utf8");
 
 const requiredHtml = [
   "Individual English Platform",
-  "Master usable English.",
   "University English",
   "Gaokao English",
   "TCM English",
@@ -36,12 +35,12 @@ for (const text of requiredHtml) {
   if (!html.includes(text)) throw new Error(`Missing platform copy: ${text}`);
 }
 
-for (const text of ["IELTS 7 Lab", "assets/ielts-study-desk.png"]) {
+for (const text of ["IELTS 7 Lab", "assets/ielts-study-desk.png", "Master usable English.", "Dashboard"]) {
   if (html.includes(text)) throw new Error(`Old IELTS-only artifact still present: ${text}`);
 }
 
-if (html.includes("一個給大學英語")) {
-  throw new Error("Homepage copy should not lead with a long Chinese explanation");
+if (!html.includes('<section class="panel active" id="vocabulary-panel">')) {
+  throw new Error("Vocabulary must be the first active learning screen");
 }
 
 for (const token of [
@@ -71,7 +70,9 @@ for (const token of [
   ".quiz-card",
   ".sound-button",
   "linear-gradient",
-  "#7c3aed",
+  "#5b21b6",
+  "#faf9ff",
+  "color-scheme: light",
   "backdrop-filter"
 ]) {
   if (!css.includes(token)) throw new Error(`Missing visual system token: ${token}`);

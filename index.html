@@ -16,8 +16,7 @@
         </a>
 
         <nav class="nav-list">
-          <button class="nav-item active" data-panel="dashboard">Dashboard</button>
-          <button class="nav-item" data-panel="vocabulary">Vocabulary</button>
+          <button class="nav-item active" data-panel="vocabulary">Vocabulary</button>
           <button class="nav-item" data-panel="patterns">Sentence Patterns</button>
           <button class="nav-item" data-panel="templates">Template Library</button>
           <button class="nav-item" data-panel="reading">Reading</button>
@@ -36,14 +35,10 @@
       </aside>
 
       <main class="workspace">
-        <header class="topbar" id="dashboard">
-          <div>
-            <span class="eyebrow">PERSONAL STUDY SPACE</span>
-            <h1>Master usable English.</h1>
-            <p>Words, patterns and practice for academic, clinical and international communication.</p>
-          </div>
-          <div class="top-stats" aria-label="Study summary">
-            <div><span>VOCABULARY</span><strong id="wordTotal">52</strong></div>
+        <header class="topbar" aria-label="Study controls">
+          <div class="study-name"><span class="brand-mark">i</span><strong>English Study</strong></div>
+          <div class="top-stats" aria-label="Study progress">
+            <div><span>WORDS</span><strong id="wordTotal">52</strong></div>
             <div><span>TEMPLATES</span><strong id="templateTotal">12</strong></div>
             <div><span>KNOWN</span><strong id="knownTotal">0</strong></div>
           </div>
@@ -57,7 +52,7 @@
           <button class="filter-chip" data-filter="IELTS">IELTS</button>
         </section>
 
-        <section class="panel active" id="dashboard-panel">
+        <section class="panel" id="archive-panel" hidden>
           <div class="section-heading"><div><span class="eyebrow">TODAY'S FOCUS</span><h2>Four small wins.</h2></div><button class="text-button" id="resetDaily">Reset day</button></div>
           <div class="daily-grid">
             <label class="daily-card"><input type="checkbox" data-daily="words" /><span class="daily-number">01</span><strong>10 words</strong><small>Listen, recall, then use one in a sentence.</small></label>
@@ -85,7 +80,7 @@
           </div>
         </section>
 
-        <section class="panel" id="vocabulary-panel">
+        <section class="panel active" id="vocabulary-panel">
           <div class="section-heading"><div><span class="eyebrow">VOCABULARY</span><h2>Words with context.</h2><p>Reveal the translation only when you need it.</p></div><div class="toolbar"><input id="wordSearch" placeholder="Search a word or meaning" /><button class="text-button" id="randomWord">Random review</button></div></div>
           <div class="word-grid" id="wordGrid"></div>
         </section>
