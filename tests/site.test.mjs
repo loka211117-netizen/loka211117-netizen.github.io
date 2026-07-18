@@ -3,7 +3,7 @@ import { existsSync, readFileSync } from "node:fs";
 import { join } from "node:path";
 
 const root = process.cwd();
-const requiredFiles = ["index.html", "styles.css", "app.js"];
+const requiredFiles = ["index.html", "styles.css", "app.js", "vocabulary.generated.js"];
 
 for (const file of requiredFiles) {
   assert.ok(existsSync(join(root, file)), `Missing required file: ${file}`);
@@ -12,7 +12,13 @@ for (const file of requiredFiles) {
 const html = readFileSync(join(root, "index.html"), "utf8");
 const css = readFileSync(join(root, "styles.css"), "utf8");
 const js = readFileSync(join(root, "app.js"), "utf8");
+const generatedVocabulary = readFileSync(join(root, "vocabulary.generated.js"), "utf8");
+const buildScript = readFileSync(join(root, "scripts", "build.mjs"), "utf8");
 const appCopy = `${html}\n${js}`;
+
+assert.ok(js.includes('from "./vocabulary.generated.js"'), "App must load the generated vocabulary library");
+assert.ok(buildScript.includes('"vocabulary.generated.js"'), "Production build must include the generated vocabulary library");
+assert.ok(generatedVocabulary.includes("export const generatedVocabulary"), "Generated vocabulary module must export its data");
 
 for (const text of [
   "Individual English Platform",
@@ -118,17 +124,18 @@ const {
   recordQuizResult
 } = app;
 
-assert.equal(vocabularyItems.length, 1320, "Vocabulary library must contain exactly 1,320 items");
+assert.equal(vocabularyItems.length, 4000, "Vocabulary library must contain exactly 4,000 items");
 assert.deepEqual(
   Object.fromEntries(Object.entries(Object.groupBy(vocabularyItems, (item) => item.category)).map(([key, items]) => [key, items.length])),
-  { daily: 220, academic: 220, gaokao: 240, ielts: 360, tcm: 150, business: 130 }
+  { daily: 220, academic: 750, gaokao: 750, ielts: 2000, tcm: 150, business: 130 }
 );
-assert.equal(vocabularyItems.length * 2, 2640, "Quiz must provide 2,640 English-Chinese direction combinations");
+assert.equal(vocabularyItems.length * 2, 8000, "Quiz must provide 8,000 English-Chinese direction combinations");
 const ieltsWords = vocabularyItems.filter((item) => item.category === "ielts");
 assert.equal(ieltsWords[0].word, "academic", "IELTS foundation words must appear before advanced vocabulary");
 for (const word of ["academic", "satisfaction", "abandon"]) {
   assert.ok(ieltsWords.some((item) => item.word === word), `Missing practical IELTS word: ${word}`);
 }
+assert.ok(/Math\.random\(\) > \.5 \? "en-zh" : "zh-en"/.test(js), "Quiz direction must randomly alternate between English-Chinese and Chinese-English");
 assert.deepEqual(categoryTargets, { daily: 3000, academic: 3000, ielts: 6000, business: 2000, tcm: 2000, gaokao: 3500 });
 
 assert.ok(searchVocabulary(vocabularyItems, "针灸").some((item) => item.word === "acupuncture"), "Chinese medical search must work");
@@ -178,4 +185,4 @@ for (const token of [
   assert.ok(appCopy.includes(token), `Missing interactive learning plan behavior: ${token}`);
 }
 
-console.log("Individual English Platform acceptance checks passed: 1,320 words and 2,640 quiz combinations verified.");
+console.log("Individual English Platform acceptance checks passed: 4,000 words and 8,000 quiz combinations verified.");

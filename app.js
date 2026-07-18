@@ -1,5 +1,7 @@
+import { generatedVocabulary } from "./vocabulary.generated.js";
+
 export const categoryTargets = { daily: 3000, academic: 3000, ielts: 6000, business: 2000, tcm: 2000, gaokao: 3500 };
-const categoryLimits = { daily: 220, academic: 220, gaokao: 240, ielts: 360, tcm: 150, business: 130 };
+const categoryLimits = { daily: 220, academic: 750, gaokao: 750, ielts: 2000, tcm: 150, business: 130 };
 const categoryMeta = {
   daily: { label: "Daily 日常", short: "Daily · 日常" },
   academic: { label: "Academic 学术", short: "Academic · 学术" },
@@ -1345,7 +1347,8 @@ workplace culture|职场文化
 };
 
 function parseVocabulary(category, raw) {
-  return raw.split("\n").map((line) => line.trim()).filter(Boolean).slice(0, categoryLimits[category]).map((line, index) => {
+  const combined = [raw, generatedVocabulary[category]].filter(Boolean).join("\n");
+  return combined.split("\n").map((line) => line.trim()).filter(Boolean).slice(0, categoryLimits[category]).map((line, index) => {
     const [word, zh] = line.split("|");
     return { id: `${category}-${String(index + 1).padStart(3, "0")}`, word, zh, category, tags: [category, word.includes(" ") ? "phrase" : "word"] };
   });
